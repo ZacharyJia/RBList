@@ -18,7 +18,7 @@ class EmailVerified
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            $is_verified = Auth::user()->isVerified;
+            $is_verified = Auth::user()->is_verified;
             if ($is_verified) {
                 return $next($request);
             } else {
