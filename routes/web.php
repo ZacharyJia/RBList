@@ -17,6 +17,7 @@ Auth::routes();
 
 Route::get('/need_verify', 'VerifyController@index')->name("need_verify");
 
+Route::get('/captcha/{tmp}', 'CaptchaController@captcha');
 
 //需要登录，且已经完成邮件验证
 Route::group(['middleware' => ['auth', 'verify']], function () {

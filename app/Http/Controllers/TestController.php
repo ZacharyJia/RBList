@@ -19,6 +19,6 @@ class TestController extends Controller
 //        return view('welcome');
 //        Mail::to('jia199474@gmail.com')
 //            ->queue(new VerifyEmail());
-        return "hehe";
+        return view('welcome');
     }
 }
