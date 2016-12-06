@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //BJTU email validator
+        Validator::extend("bjtu_email", function ($attribute, $value, $parameters, $validator) {
+            return ends_with($value, "@bjtu.edu.cn");
+        });
     }
 
     /**

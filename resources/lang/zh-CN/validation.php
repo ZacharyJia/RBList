@@ -85,6 +85,7 @@ return [
     'unique'               => ':attribute 已经存在。',
     'uploaded'             => ':attribute 上传失败。',
     'url'                  => ':attribute 格式不正确。',
+    'bjtu_email'           => ':attribute必须为交大邮箱, 如：***@bjtu.edu.cn',
 
     /*
     |--------------------------------------------------------------------------

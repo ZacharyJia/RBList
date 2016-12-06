@@ -17,4 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/need_verify', 'VerifyController@index')->name("need_verify");
+
+
+//需要登录，且已经完成邮件验证
+Route::group(['middleware' => ['auth', 'verify']], function () {
+
+    Route::get('/home', 'HomeController@index');
+
+});
