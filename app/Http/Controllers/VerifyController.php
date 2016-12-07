@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\VerifyEmail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class VerifyController extends Controller
@@ -42,13 +44,39 @@ class VerifyController extends Controller
         return view('auth.verified')->with(['status' => $status]);
     }
 
+
+    public function show_resend_mail()
+    {
+        return view('auth.resend')->with([
+            'is_verified' => Auth::user()->is_verified,
+        ]);
+    }
+
     public function resend_mail(Request $request)
     {
         $phrase = $request->input('phrase');
         if (Session::get('captcha') == $phrase) {
+            $user = Auth::user();
 
+            //这里是计算上次生成时间和本次生成时间的差距是否在1分钟以上。
+            //因为verify_token_time里记录的是过期时间，是上次生成时间+30min
+            if (Carbon::now()->addMinutes(29) < $user->verify_token_time ) {
+                return redirect()->back()
+                    ->withErrors([
+                        "captcha" => "您的请求过于频繁，请1分钟后再试",
+                    ]);
+            } else {
+                $user->generate_verify_token();
+                Mail::to($user->email)
+                    ->queue(new VerifyEmail($user));
+
+                return redirect()->route('need_verify');
+            }
         } else {
-            return redirect()->back();
+            return redirect()->back()
+                ->withErrors([
+                "captcha" => "验证码错误",
+            ]);
         }
     }
 }

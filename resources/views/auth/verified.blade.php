@@ -14,37 +14,12 @@
                         您已激活账户，无需验证邮箱。
                     @else
                         验证连接已超时，点击以下按钮重新发送激活连接。
-                        <br />
-                        <form class="form-horizontal" role="form" method="post" action="{{ route('resend_verify_email') }}">
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <label for="email" class="col-md-4 control-label">验证码</label>
-                                <img id="captcha_img" src="/captcha/{{ \Carbon\Carbon::now()->getTimestamp() }}" onclick="refresh_captcha()" />
-                                <div class="col-md-4">
-                                    <input id="captcha" type="text" class="form-control" name="phrase" required autofocus>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-8 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        重新发送
-                                    </button>
-                                </div>
-                            </div>
-
-
-                        </form>
+                        <br /><br /><br />
+                        <a href="{{ route("show_resend_verify_email") }}" class="btn btn-primary">重新发送</a>
                     @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<script type="application/javascript">
-    function refresh_captcha() {
-        $('#captcha_img').attr('src', "/captcha/" + new Date().getTime());
-    }
-</script>
 @endsection
