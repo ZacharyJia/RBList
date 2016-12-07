@@ -19,6 +19,7 @@ class TestController extends Controller
 //        return view('welcome');
 //        Mail::to('jia199474@gmail.com')
 //            ->queue(new VerifyEmail());
+        dd(route("verify", ['token' => "heihei123", 'email' => '13281110@bjtu.edu.cn']));
         return view('welcome');
     }
 }

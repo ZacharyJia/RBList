@@ -15,13 +15,14 @@ Route::get('/', 'TestController@index');
 
 Auth::routes();
 
-Route::get('/need_verify', 'VerifyController@index')->name("need_verify");
+Route::get('/need_verify', 'VerifyController@show_need_verify')->name("need_verify")->middleware("auth");
+Route::get('/verify/{email}/{token}', 'VerifyController@verify')->name("verify");
+Route::post('/resend_verify_email', 'VerifyController@resend_mail')->name("resend_verify_email");
 
 Route::get('/captcha/{tmp}', 'CaptchaController@captcha');
 
 //需要登录，且已经完成邮件验证
 Route::group(['middleware' => ['auth', 'verify']], function () {
-
-    Route::get('/home', 'HomeController@index');
+    Route::get('/home', 'HomeController@index')->name("home");
 
 });

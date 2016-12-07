@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\VerifyEmail;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -67,5 +71,18 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * 注册完成之后，生成随机token
+     *
+     * @param Request $request
+     * @param $user
+     */
+    protected function registered(Request $request, User $user)
+    {
+        $user->generate_verify_token();
+        Mail::to($user->email)
+            ->queue(new VerifyEmail($user));
     }
 }
