@@ -34,6 +34,10 @@ POST
   "code": "200",
   "msg": "OK",
   "data": {
+    "count": "162",
+    "total_page": "9",
+    "curPage": "1",
+    "pageSize": "20",
     "shop_list": [
       {"id": "ajH32", "name": "印刷厂打印店", "good": "20", "bad": "10"},
       {"id": "as332", "name": "嘉园楼底打印店", "good": "20", "bad": "10"},
