@@ -28,3 +28,6 @@ Route::group(['middleware' => ['auth', 'verify']], function () {
     Route::get('/home', 'HomeController@index')->name("home");
 
 });
+
+//不需要登录的接口
+Route::post('/api/categorylist', 'CategoryController@getCategoryList');

@@ -10,4 +10,20 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected function success($data = null)
+    {
+        $result = [
+            "code" => "200",
+            "msg" => "OK",
+        ];
+
+        if ($data != null) {
+            $result['data'] = [
+                "category_list" => $data
+            ];
+        }
+
+        return $result;
+    }
 }
