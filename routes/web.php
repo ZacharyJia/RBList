@@ -31,3 +31,4 @@ Route::group(['middleware' => ['auth', 'verify']], function () {
 
 //不需要登录的接口
 Route::post('/api/categorylist', 'CategoryController@getCategoryList');
+Route::post('/api/userinfo', 'UserController@userInfo');

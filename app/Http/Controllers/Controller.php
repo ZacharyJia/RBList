@@ -26,4 +26,14 @@ class Controller extends BaseController
 
         return $result;
     }
+
+    protected function error($code, $msg)
+    {
+        $result = [
+            "code" => $code,
+            "msg" => $msg,
+        ];
+
+        return $result;
+    }
 }
