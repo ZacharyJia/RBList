@@ -21,8 +21,10 @@ class CategoryController extends Controller
 
         $data = $category->map(function($item, $key) {
             return [
-                'id' => Hashids::encode($item['id']),
-                'name' => $item['name'],
+                "category_list" => [
+                    'id' => Hashids::encode($item['id']),
+                    'name' => $item['name'],
+                ]
             ];
         });
 

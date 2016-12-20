@@ -17,4 +17,20 @@ class Shop extends Model
         return $this->hasMany('App\Models\Comment');
     }
 
+    public function goodCommentCount()
+    {
+        return $this->comments->where('type', 1)->count();
+    }
+
+    public function badCommentCount()
+    {
+        return $this->comments->where('type', 2)->count();
+    }
+
+    public function overallCommentCount()
+    {
+        return $this->goodCommentCount() - $this->badCommentCount();
+    }
+
+
 }

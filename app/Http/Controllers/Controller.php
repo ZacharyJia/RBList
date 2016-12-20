@@ -19,9 +19,7 @@ class Controller extends BaseController
         ];
 
         if ($data != null) {
-            $result['data'] = [
-                "category_list" => $data
-            ];
+            $result['data'] = $data;
         }
 
         return $result;
