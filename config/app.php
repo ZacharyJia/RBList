@@ -168,6 +168,8 @@ return [
          * Package Service Providers...
          */
         Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Vinkla\Hashids\HashidsServiceProvider::class,
 
         //
 
@@ -227,6 +229,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
 
     ],
 

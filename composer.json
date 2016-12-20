@@ -9,7 +9,9 @@
         "laravel/framework": "5.3.*",
         "overtrue/laravel-lang": "~3.0",
         "gregwar/captcha": "^1.1",
-        "s-ichikawa/laravel-sendgrid-driver": "^1.1"
+        "s-ichikawa/laravel-sendgrid-driver": "^1.1",
+        "barryvdh/laravel-ide-helper": "^2.2",
+        "vinkla/hashids": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
