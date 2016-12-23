@@ -9,12 +9,9 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Comment;
 use App\Models\Shop;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Hashids;
-use DB;
 
 class ShopController extends Controller
 {
