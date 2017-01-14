@@ -20,7 +20,7 @@ class ShopController extends Controller
     public function shopList(Request $request)
     {
         $pageSize = intval($request->input('pageSize', 20));
-        $curPage = intval($request->input('curPage', 20));
+        $curPage = intval($request->input('curPage', 1));
         $type = $request->input('type', "0");
         $category = $request->input('category', '0');
         $order = $request->input('order', 'desc');

@@ -20,7 +20,7 @@ class CommentController extends Controller
 
     public function comment(Request $request) {
         $validator = Validator::make($request->all(), [
-            'shop_id' => 'required',
+            'shop_id' => 'required|integer',
             'content' => 'required|string',
             'type' => 'required|integer|in:1,2',
             'reply' => 'string'
