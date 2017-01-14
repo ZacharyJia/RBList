@@ -74,7 +74,7 @@ class ShopController extends Controller
         $count = $shops->count();
 
         //分页
-        $shops = $shops->flatten()->forPage($curPage, $pageSize);
+        $shops = $shops->flatten()->forPage($curPage, $pageSize)->flatten();
 
         //生成返回数据
         $data = $shops->map(function ($item, $key){
