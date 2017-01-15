@@ -11,4 +11,8 @@ class Comment extends Model
 
     protected $table = "comment";
     protected $primaryKey = "id";
+
+    public function creator() {
+        return $this->belongsTo('App\Models\User', 'user_id');
+    }
 }

@@ -50,7 +50,61 @@ class CommentController extends Controller
         return $this->success();
     }
 
-    public function commentList() {
+    public function commentList(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'pageSize' => 'integer',
+            'curPage' => 'integer',
+            'shop_id' => 'required',
+            'type' => 'integer',
+            'order' => 'in:asc,desc'
+        ]);
+        if ($validator->fails()) {
+            return $this->error('506', '参数错误');
+        }
+
+        $pageSize = intval($request->input('pageSize', 20));
+        $curPage = intval($request->input('curPage', 1));
+        $shop_id = Hashids::decode($request->input('shop_id'));
+        $type = intval($request->input('type', "0"));
+        $order = $request->input('order', 'desc');
+        $orderBy = $request->input('orderBy', 'time');
+
+        $builder = Comment::With('creator')
+            ->where('shop_id', '=', $shop_id);
+        if ($type != 0) {
+            $builder->where('type', '=', $type);
+        }
+
+        $count = $builder->count();
+
+        $builder->offset(($curPage - 1) * $pageSize)
+            ->limit($pageSize);
+
+        if ($orderBy == 'time') {
+            $builder->orderBy('created_at', $order);
+        }
+
+        $data = $builder->get()->map(function ($comment){
+            return [
+                'id' => Hashids::encode($comment->id),
+                'creator_id' => Hashids::encode($comment->user_id),
+                'creator' => $comment->creator == null ? '匿名用户' : $comment->creator->name,
+                'content' => $comment->content,
+                'type' => $comment->type == 1 ? 'good':'bad',
+            ];
+        });
+        $result = [
+            'count' => $count,
+            'total_page' => ceil($count / $pageSize),
+            'cur_page' => $curPage,
+            'pageSize' => $pageSize,
+            'comment_list' => $data->toArray(),
+        ];
+
+        return $this->success($result);
+
+
 
     }
 
