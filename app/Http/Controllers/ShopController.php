@@ -32,8 +32,8 @@ class ShopController extends Controller
 
         $builder = Shop::with('comments');
 
-        if ($category != 0) {
-            $builder->where('category_id', $category);
+        if ($category != '0' && !empty($category_id = Hashids::decode($category))) {
+            $builder->where('category_id', '=', $category_id);
         }
 
         $shops = $builder->get()
