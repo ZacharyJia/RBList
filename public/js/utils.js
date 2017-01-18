@@ -26,41 +26,48 @@ function pager(callFuncName, totalPage, curPage) {
   pageNextLi = $("<li></li>").append(pageNext);
   $(".pager").append(pageNextLi);
 }
+
+function checkLoginStatus(callback) {
+  $.ajax({
+    url: "/api/userinfo",
+    success: function (userinfo) {
+      if (userinfo.code === "200" && userinfo.data.verified === 1)
+        callback(userinfo.data.username);
+      else callback(false);
+   }
+  });
+}
+
+function navLoginStatus(username) {
+  if (username) {
+    $("#nav_login").hide();
+    $("#nav_register").hide();
+    var newUserStatus = $("<a></a>").attr("href", "#").text(username).appendTo($("<li></li>"));
+    $("#status").append(newUserStatus.parent());
+  }
+  else alert("未登录");
+}
+
 $.ajaxSetup({
   headers: {
     'X-XSRF-TOKEN': $.cookie('XSRF-TOKEN')
-  }
+  },
+  type: "POST",
+  contentType: 'application/json',
+  dataType: "json",
 });
+
 $(document).ready(function () {
   $('.contentwrap').css({ 'margin-top': (($('.navbar-fixed-top').height()) + 10) + 'px' });
   $(window).resize(function () {
     $('.contentwrap').css({ 'margin-top': (($('.navbar-fixed-top').height()) + 10) + 'px' });
   });
-  window.username;
+  checkLoginStatus(navLoginStatus);
+
+
+
   $.ajax({
-    type: "POST",
-    url: "/api/userinfo",
-    data: "",
-    dataType: "json",
-    success: function (userinfo) {
-      username=userinfo.data.username;
-      if (userinfo.code === "200") {
-        if (userinfo.data.verified === 1) {
-          $("#login").remove();
-          $("#register").remove();
-          var newLi = $("<li></li>");
-          var newA = $("<a></a>").attr("href", "#").text(userinfo.data.username);
-          newLi.html(newA);
-          $("#status").append(newLi);
-        }
-      }
-    }
-  });
-  $.ajax({
-    type: "POST",
     url: "/api/categorylist",
-    data: "",
-    dataType: "json",
     success: function (list) {
       if (list.code === "200") {
         $.each(list.data, function (i, item) {

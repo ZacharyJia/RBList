@@ -5,11 +5,8 @@ function setCurType(x) {
 }
 function showShop(curPage) {
   $.ajax({
-    type: "POST",
     url: "/api/shoplist",
-    contentType: 'application/json',
     data: JSON.stringify({ "curPage": curPage, "type": curType }),
-    dataType: "json",
     success: function (response) {
       if (response.code === "200") {
         var shop_list_len = response.data.shop_list.length;
