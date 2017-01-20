@@ -62,6 +62,7 @@ $(document).ready(function () {
   $(window).resize(function () {
     $('.contentwrap').css({ 'margin-top': (($('.navbar-fixed-top').height()) + 10) + 'px' });
   });
+
   checkLoginStatus(navLoginStatus);
 
 

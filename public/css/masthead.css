@@ -5,17 +5,21 @@
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 0 rgba(0,0,0,.1);
-  background-color: #3280fc;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#1970fc), to(#3280fc));
-  background-image: -webkit-linear-gradient(top, #1970fc 0%, #3280fc 100%);
-  background-image:      -o-linear-gradient(top, #1970fc 0%, #3280fc 100%);
-  background-image:         linear-gradient(to bottom, #1970fc 0%, #3280fc 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1970fc', endColorstr='#3280fc', GradientType=0);
-  background-repeat: repeat-x;
+  /*background-color: #3280fc;
+  background-repeat: repeat-x;*/
 }
 
 
 .masthead {
+  background-image: url(../img/header-bg.jpg);
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+
   margin: 0 auto 30px;
 }
 .masthead h1 {

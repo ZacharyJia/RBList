@@ -19,6 +19,7 @@ var bad = getUrlParameter("bad");
 $("#name").text(name);
 $("#good").text(good);
 $("#bad").text(bad);
+$(".progress-bar").css({"width": parseInt(good)/(parseInt(good)+parseInt(bad))*100 + "%"});
 $(".breadcrumb li:eq(2)").text(name);
 function showComment(curPage) {
   $.ajax({

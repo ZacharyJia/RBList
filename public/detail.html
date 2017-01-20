@@ -20,7 +20,10 @@
           <span class="icon-bar"></span>
         </button>
         <!-- 品牌名称或logo -->
-        <a class="navbar-brand" href="/">交大红黑榜</a>
+        <a class="navbar-brand" href="/">
+          <span class="icon icon-diamond icon-2x"></span>
+          <span>交大红黑榜</span>
+        </a>
       </div>
       <!-- 导航项目 -->
       <div class="collapse navbar-collapse">
@@ -38,15 +41,6 @@
             </a>
             <ul class="dropdown-menu" role="menu" id="allCategory">
             </ul>
-          </li>
-          <!-- 搜索 -->
-          <li>
-            <form class="navbar-form col-md-4" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="搜索">
-              </div>
-              <button type="submit" class="btn btn-default">搜索</button>
-            </form>
           </li>
         </ul>
         <!-- 右侧的导航项目 -->
@@ -74,116 +68,106 @@
     </div>
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-        <div class="panel">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="col-xs-12 col-sm-4">
-                  <img class="img-circle img-responsive" alt="" src="img/default_avatar.png">
-                </div>
-                <div class="col-xs-12 col-sm-8">
-                  <div class="list-group">
-                    <a class="list-group-item">
-                      <p class="list-group-item-text text-muted">店名</p>
-                      <h4 class="list-group-item-heading" id="name"></h4>
-                    </a>
-                    <a class="list-group-item">
-                      <p class="list-group-item-text text-muted">类别</p>
-                      <h4 class="list-group-item-heading" id="category"></h4>
-                    </a>
-                    <a class="list-group-item">
-                      <p class="list-group-item-text text-muted">好评人数</p>
-                      <h4 class="list-group-item-heading" id="good"></h4>
-                    </a>
-                    <a class="list-group-item">
-                      <p class="list-group-item-text text-muted">差评人数</p>
-                      <h4 class="list-group-item-heading" id="bad"></h4>
-                    </a>
-                  </div>
-                </div>
-              </div>
+        <div class="card" href="###">
+          <img src="img/card-header.png" alt="">
+          <div class="card-heading"><h1 id="name"></h1></div>
+        </div>
+        <div class="row">
+         <div class="col-xs-6 col-sm-6">
+           <h3 class="with-padding" style="color: #EA644A">好评
+             <span class="label label-badge" id="good"></span>
+           </h3>
+           
+         </div>
+         <div class="col-xs-6 col-sm-6 pull-right">
+           <h3 class="pull-right with-padding" style="color: #808080">差评
+             <span class="label label-badge" id="bad"></span>
+           </h3>
+           
+         </div>
+       </div>
+       <div class="progress">
+        <div class="progress-bar progress-bar-danger">
+        </div>
+        
+      </div>
+
+      <!-- END. header -->
+      <hr>
+      <div class="container">
+        <div class="comments">
+          <header>
+            <div class="pull-right">
+              <a href="#commentReplyForm" class="btn btn-primary page-scroll">
+                <i class="icon-comment-alt"></i> 发表评价
+              </a>
             </div>
+            <h3>所有评价</h3>
+          </header>
+          <section class="comments-list">
+            <!-- comment here -->
+          </section>
+          <div class="text-center">
+            <ul class="pager">
+            </ul>
           </div>
-          <!-- END. header -->
-          <hr>
-          <div class="container">
-            <div class="comments">
-              <header>
-                <div class="pull-right">
-                  <a href="#commentReplyForm" class="btn btn-primary page-scroll">
-                    <i class="icon-comment-alt"></i> 发表评价
-                  </a>
+          <footer>
+            <div class="reply-form" id="commentReplyForm">
+              <a href="###" class="avatar">
+                <i class="icon-user icon-2x"></i>
+              </a>
+              <div class="form">
+                <div class="form-group">
+                  <textarea class="form-control new-comment-text" rows="2" placeholder="撰写评价前请先登录..."></textarea>
                 </div>
-                <h3>所有评价</h3>
-              </header>
-              <section class="comments-list">
-                <!-- comment here -->
-              </section>
-              <div class="text-center">
-                <ul class="pager">
-                </ul>
-              </div>
-              <footer>
-                <div class="reply-form" id="commentReplyForm">
-                  <a href="###" class="avatar">
-                    <i class="icon-user icon-2x"></i>
-                  </a>
-                  <div class="form">
-                    <div class="form-group">
-                      <textarea class="form-control new-comment-text" rows="2" placeholder="撰写评价前请先登录..."></textarea>
-                    </div>
-                    <div class="form-group comment-user">
-                      <div class="row">
-                        <div class="col-md-5">
-                          <div class="btn-group">
-                            <button class="btn btn-mini" href="/login">登录</button>
-                            <button class="btn btn-mini" href="/register">注册</button>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <label class="radio-inline">
-                            <input type="radio" name="commentType"> 好评
-                          </label>
-                          <label class="radio-inline">
-                            <input type="radio" name="commentType"> 差评
-                          </label>
-                        </div>
-                        <div class="col-md-3">
-                          <button class="btn btn-block btn-primary disabled" onclick="comment()">
-                            <i class="icon-ok"></i>
-                          </button>
-                        </div>
+                <div class="form-group comment-user">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="btn-group">
+                        <button class="btn btn-mini" href="/login">登录</button>
+                        <button class="btn btn-mini" href="/register">注册</button>
                       </div>
                     </div>
+                    <div class="col-md-4">
+                      <label class="radio-inline">
+                        <input type="radio" name="commentType"> 好评
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" name="commentType"> 差评
+                      </label>
+                    </div>
+                    <div class="col-md-3">
+                      <button class="btn btn-block btn-primary disabled" onclick="comment()">
+                        <i class="icon-ok"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </footer>
+              </div>
             </div>
-          </div>
-          <!-- END.comment -->
+          </footer>
         </div>
-        <!-- END.panel -->
       </div>
     </div>
-    <!-- END.row -->
   </div>
-  <footer>
-    <div class="container text-center">
-      <hr>
-      <div class="row">
-        <div class="col-md-6">
-          <h5><a href="#">About us</a></h5>
-        </div>
+</div>
+<footer>
+  <div class="container text-center">
+    <hr>
+    <div class="row">
+      <div class="col-md-6">
+        <h5><a href="#">About us</a></h5>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script src="js/jquery-1.11.0.min.js"></script>
-  <script src="js/jquery.cookie.js"></script>
-  <!-- <script src="js/scrolling-nav.js"></script> -->
-  <script src="js/zui.min.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/detail.js"></script>
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<!-- <script src="js/scrolling-nav.js"></script> -->
+<script src="js/zui.min.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/detail.js"></script>
 </body>
 
 </html>
