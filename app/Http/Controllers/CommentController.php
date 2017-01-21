@@ -32,7 +32,11 @@ class CommentController extends Controller
         $reply_to = Hashids::decode($request->input('reply'));
 
 
-        if ($validator->fails()) {
+        if ($validator->fails() || empty($shop_id)) {
+            return $this->error('506', '参数错误');
+        }
+
+        if (!empty($request->input('reply')) && empty($reply_to)) {
             return $this->error('506', '参数错误');
         }
 
@@ -42,7 +46,7 @@ class CommentController extends Controller
         $comment['user_id'] = $user_id;
         $comment['shop_id'] = $shop_id;
         $comment['content'] = $content;
-        $comment['reply_to'] = $reply_to;
+        $comment['reply_to'] = empty($reply_to) ? null : $reply_to;
         $comment['type'] = $type;
 
         $comment->save();
