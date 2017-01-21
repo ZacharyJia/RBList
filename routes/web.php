@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'TestController@index');
+Route::get('/', function () {
+    return redirect('/index.html');
+});
 
 Auth::routes();
 
