@@ -1,12 +1,41 @@
-var curType;
+var curType = 0;
+var curCategory = 0;
 function setCurType(x) {
-  curType = x;
+  if(curType !== x)
+  {
+    curType = x;
+    if(x === 1)
+    {
+      $(".navbar-default").css("background-color","#EA644A");
+      $(".navbar-default .navbar-brand").css("color","#F1F1F1");
+      $(".navbar-default .navbar-nav > li > a").css("color","#F1F1F1");
+    }
+    else
+    {
+      $(".navbar-default").css("background-color","#BD7B46");
+      $(".navbar-default .navbar-brand").css("color","#F1F1F1");
+      $(".navbar-default .navbar-nav > li > a").css("color","#F1F1F1");
+    }
+  }
+  else 
+  {
+    curType = 0;
+    $(".navbar-default").css("background-color","#fff");
+    $(".navbar-default .navbar-brand").css("color","#333");
+    $(".navbar-default .navbar-nav > li > a").css("color","#333");
+  }
   showShop(1);
+}
+function setCategory(id){
+  if(curCategory !== id)curCategory = id;
+  else curCategory = 0;
+  showShop(1);
+  
 }
 function showShop(curPage) {
   $.ajax({
     url: "/api/shoplist",
-    data: JSON.stringify({ "curPage": curPage, "type": curType }),
+    data: { "curPage": curPage, "type": curType, "category":curCategory, "pageSize": 20 },
     success: function (response) {
       if (response.code === "200") {
         var shop_list_len = response.data.shop_list.length;
@@ -53,11 +82,26 @@ function showShop(curPage) {
             .append(newCardAction);
           newCol = $("<div></div>").attr("class", "col-md-4 col-sm-6 col-lg-3");
           newShop = newCol.append(newCard);
-          $(".cards").append(newShop);
+          $(".cards").css({"min-height":"450px"}).append(newShop);
           pager("showShop", totalPage, curPage);
         }
       }
     }
   });
 }
-setCurType(0);
+
+$(window).scroll(function() {
+
+   if ($(this).scrollTop()>0)
+     {
+        $('.masthead').fadeOut();
+        
+        
+     }
+    // else
+    //  {
+    //   $('.masthead').fadeIn();
+    //  }
+ });
+
+showShop(1);

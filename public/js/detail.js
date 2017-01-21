@@ -19,12 +19,13 @@ var bad = getUrlParameter("bad");
 $("#name").text(name);
 $("#good").text(good);
 $("#bad").text(bad);
-$(".progress-bar").css({"width": parseInt(good)/(parseInt(good)+parseInt(bad))*100 + "%"});
+$(".progress-bar-danger").css({"width": parseInt(good)/(parseInt(good)+parseInt(bad))*100 + "%"});
+$(".progress-bar-warning").css({"width": 100-(parseInt(good)/(parseInt(good)+parseInt(bad))*100) + "%"});
 $(".breadcrumb li:eq(2)").text(name);
 function showComment(curPage) {
   $.ajax({
     url: "/api/commentlist",
-    data: JSON.stringify({ "shop_id": shop_id, "curPage": curPage }),
+    data: { "shop_id": shop_id, "curPage": curPage },
     success: function (response) {
       if (response.code === "200") {
         $(".comments_list").replaceWith("<section class='comments_list' ></section>");
@@ -66,7 +67,7 @@ function comment() {
 
   $.ajax({
     url: "/api/comment",
-    data: JSON.stringify({ "shop_id": shop_id, "content": commentContent, "type": commentType }),
+    data: { "shop_id": shop_id, "content": commentContent, "type": 1 },
     success: function (response) {
       alert("done");
     }

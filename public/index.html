@@ -9,7 +9,7 @@
   <link href="css/masthead.css" rel="stylesheet" />
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <!-- 移动设备上的导航切换按钮 -->
@@ -29,14 +29,22 @@
       <div class="collapse navbar-collapse">
         <!-- 一般导航项目 -->
         <ul class="nav navbar-nav ">
-          <li>
-            <a href="#" class="page-scroll">红</a>
+          <li id="red">
+            <a href="javascript:void(0)" 
+            onclick=
+            "setCurType(1);$(this).parent().toggleClass('active'); $('#black').removeClass('active');" 
+            class="page-scroll">&nbsp;&nbsp;红&nbsp;&nbsp;
+            </a>
           </li>
-          <li>
-            <a href="#" class="page-scroll">黑</a>
+          <li id="black">
+            <a href="javascript:void(0)" 
+            onclick=
+            "setCurType(2);$(this).parent().toggleClass('active');$('#red').removeClass('active');" 
+            class="page-scroll">&nbsp;&nbsp;黑&nbsp;&nbsp;
+            </a>
           </li>
           <!-- 导航中的下拉菜单 -->
-          <li class="dropdown active">
+          <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">类别<span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu" id="allCategory">
@@ -64,20 +72,15 @@
      <a class="btn btn-lg" href="#display_shop">Get start!</a>
     </div> 
   </main>
-  <div class="container">
-    <br>
+  <div class="container contentwrap">
     <div class="row" id="display_shop">
-      <div class="row">
-        <!--<div class="col-md-6 col-sm-12 col-lg-4">-->
+      <!--<div class="row">
         <ul class="nav nav-secondary nav-justified">
           <li class="active"><a href="javascript:void(0);" onclick="setCurType(0)">全部店铺</a></li>
           <li><a href="javascript:void(0);" onclick="setCurType(1)">红榜店铺</a></li>
           <li><a href="javascript:void(0);" onclick="setCurType(2)">黑榜店铺</a></li>
         </ul>
-        <!--</div>-->
-      </div>
-      <br>
-      <br>
+      </div>-->
       <div class="cards">
         <!-- shop info here! -->
       </div>      

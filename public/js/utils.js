@@ -45,7 +45,6 @@ function navLoginStatus(username) {
     var newUserStatus = $("<a></a>").attr("href", "#").text(username).appendTo($("<li></li>"));
     $("#status").append(newUserStatus.parent());
   }
-  else alert("未登录");
 }
 
 $.ajaxSetup({
@@ -53,7 +52,6 @@ $.ajaxSetup({
     'X-XSRF-TOKEN': $.cookie('XSRF-TOKEN')
   },
   type: "POST",
-  contentType: 'application/json',
   dataType: "json",
 });
 
@@ -73,7 +71,13 @@ $(document).ready(function () {
       if (list.code === "200") {
         $.each(list.data, function (i, item) {
           var categoryName = item.category_list.name;
-          var content = $("<li>" + "<a href=\"#\">" + categoryName + "</a>" + "</li>");
+          var categoryId = item.category_list.id;
+          var content = $("<li></li>").append("<a></a>").find("a")
+          .attr("href","javascript:void(0)")
+          .attr("onclick","setCategory('" + categoryId + 
+                "');$(this).parent().siblings().removeClass('active').end().toggleClass('active');")
+          .text(categoryName)
+          .end();
           $("#allCategory").append(content);
         })
       }
