@@ -6,23 +6,17 @@ function setCurType(x) {
     curType = x;
     if(x === 1)
     {
-      $(".navbar-default").css("background-color","#EA644A");
-      $(".navbar-default .navbar-brand").css("color","#F1F1F1");
-      $(".navbar-default .navbar-nav > li > a").css("color","#F1F1F1");
+      setNavColor("#F1F1F1","#EA644A");
     }
     else
     {
-      $(".navbar-default").css("background-color","#BD7B46");
-      $(".navbar-default .navbar-brand").css("color","#F1F1F1");
-      $(".navbar-default .navbar-nav > li > a").css("color","#F1F1F1");
+      setNavColor("#F1F1F1","#BD7B46");
     }
   }
   else 
   {
     curType = 0;
-    $(".navbar-default").css("background-color","#fff");
-    $(".navbar-default .navbar-brand").css("color","#333");
-    $(".navbar-default .navbar-nav > li > a").css("color","#333");
+    setNavColor("#333","#fff");
   }
   showShop(1);
 }
@@ -31,6 +25,14 @@ function setCategory(id){
   else curCategory = 0;
   showShop(1);
   
+}
+function setNavColor(fontColor,bgColor){
+  $(".navbar-default").css("background-color",bgColor);
+  $(".navbar-default .navbar-brand").css("color",fontColor);
+  $(".navbar-default .navbar-nav > li > a").css("color",fontColor);
+  if(bgColor != "#fff")
+    $("ul:nth-child(1) > .active > a").css("color",bgColor);
+    
 }
 function showShop(curPage) {
   $.ajax({
