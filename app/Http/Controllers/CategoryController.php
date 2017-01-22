@@ -10,7 +10,6 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Category;
-use Hashids;
 
 class CategoryController extends Controller
 {
@@ -22,7 +21,7 @@ class CategoryController extends Controller
         $data = $category->map(function($item, $key) {
             return [
                 "category_list" => [
-                    'id' => Hashids::encode($item['id']),
+                    'id' => hashid_encode($item['id']),
                     'name' => $item['name'],
                 ]
             ];
