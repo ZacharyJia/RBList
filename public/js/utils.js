@@ -14,7 +14,10 @@ function pager(callFuncName, totalPage, curPage) {
     pageNumLi = $("<li></li>").append(pageNum);
     $(".pager").append(pageNumLi);
     if (i === curPage)
-      pageNumLi.attr("class", "active");
+     {
+       pageNumLi.attr("class", "active");
+       pageNumLi.children().removeAttr("onclick");
+     }
 
   }
   pageNext = $("<a>»</a>");
@@ -87,6 +90,6 @@ $(document).ready(function () {
 
 $body = $("body");
 $(document).on({
-    ajaxStart: function() { $body.addClass("loading");    },
-     ajaxStop: function() { $body.removeClass("loading"); }    
+  ajaxStart: function() { $body.addClass("loading");},
+    ajaxStop: function() { $body.removeClass("loading");}    
 });

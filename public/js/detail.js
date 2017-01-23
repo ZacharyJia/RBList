@@ -28,7 +28,7 @@ function showComment(curPage) {
     data: { "shop_id": shop_id, "curPage": curPage },
     success: function (response) {
       if (response.code === "200") {
-        $(".comments_list").replaceWith("<section class='comments_list' ></section>");
+        $(".comments-list").replaceWith("<section class='comments-list' ></section>");
         var comment_list_len = response.data.comment_list.length;
         var totalPage = response.data.total_page;
         for (var i = 0; i < comment_list_len; i++) {
