@@ -32,6 +32,7 @@ function showComment(curPage) {
         var comment_list_len = response.data.comment_list.length;
         var totalPage = response.data.total_page;
         for (var i = 0; i < comment_list_len; i++) {
+          newAvatar = $("<a class='avatar'></a>").append("<i class='icon-user icon-2x'></i>");
           newCommentTime = $("<div class='pull-right text-muted'></div>").text("2016");
           newCreatorText = $("<strong><strong>").text(response.data.comment_list[i].creator);
           newCreatorLink = $("<a></a>")
@@ -46,7 +47,10 @@ function showComment(curPage) {
             .append(newCreator)
             .append(newCommentText)
             .append(newCommentReply);
-          newComment = $("<div class='comment'></div>").append(newContent);
+          newComment = $("<div class='comment'></div>").append(newAvatar).append(newContent);
+          if(response.data.comment_list[i].type === "good")
+            newComment.addClass("good");
+          else newComment.addClass("bad");
           $(".comments-list").append(newComment);
           pager("showComment", totalPage, curPage);
         }

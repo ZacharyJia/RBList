@@ -126,3 +126,23 @@ body.loading .loading-modal {
     margin-right: 380px;
   }
 }
+
+.good {
+    background-image: url(/img/good.png);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: top right;
+    -webkit-background-size: 100px 100px;
+    -moz-background-size: 100px 100px;
+    background-size: 100px 100px;
+}
+.bad {
+    background-image: url(/img/bad.png);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: top right;
+    -webkit-background-size: 100px 100px;
+    -moz-background-size: 100px 100px;
+    background-size: 100px 100px;
+}
+
