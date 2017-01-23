@@ -12,9 +12,9 @@
                 50% 50% 
                 no-repeat;
 }
-body.loading {
+/*body.loading {
     overflow: hidden;   
-}
+}*/
 body.loading .loading-modal {
     display: block;
 }
