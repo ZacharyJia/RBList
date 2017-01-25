@@ -13,7 +13,6 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Validator;
 use Auth;
-use Hashids;
 
 class CommentController extends Controller
 {
@@ -26,10 +25,10 @@ class CommentController extends Controller
             'reply' => 'string'
         ]);
 
-        $shop_id = Hashids::decode($request->input('shop_id'));
+        $shop_id = hashid_decode($request->input('shop_id'));
         $content = $request->input('content');
         $type = $request->input('type');
-        $reply_to = Hashids::decode($request->input('reply'));
+        $reply_to = hashid_decode($request->input('reply'));
 
 
         if ($validator->fails() || empty($shop_id)) {
@@ -46,7 +45,7 @@ class CommentController extends Controller
         $comment['user_id'] = $user_id;
         $comment['shop_id'] = $shop_id;
         $comment['content'] = $content;
-        $comment['reply_to'] = empty($reply_to) ? null : $reply_to;
+        $comment['reply_to'] = $reply_to == null ? 0 : $reply_to;
         $comment['type'] = $type;
 
         $comment->save();
@@ -69,7 +68,7 @@ class CommentController extends Controller
 
         $pageSize = intval($request->input('pageSize', 20));
         $curPage = intval($request->input('curPage', 1));
-        $shop_id = Hashids::decode($request->input('shop_id'));
+        $shop_id = hashid_decode($request->input('shop_id'));
         $type = intval($request->input('type', "0"));
         $order = $request->input('order', 'desc');
         $orderBy = $request->input('orderBy', 'time');
@@ -91,8 +90,8 @@ class CommentController extends Controller
 
         $data = $builder->get()->map(function ($comment){
             return [
-                'id' => Hashids::encode($comment->id),
-                'creator_id' => Hashids::encode($comment->user_id),
+                'id' => hashid_encode($comment->id),
+                'creator_id' => hashid_encode($comment->user_id),
                 'creator' => $comment->creator == null ? '匿名用户' : $comment->creator->name,
                 'content' => $comment->content,
                 'type' => $comment->type == 1 ? 'good':'bad',

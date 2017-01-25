@@ -11,7 +11,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Shop;
 use Illuminate\Http\Request;
-use Hashids;
 
 class ShopController extends Controller
 {
@@ -32,7 +31,7 @@ class ShopController extends Controller
 
         $builder = Shop::with('comments');
 
-        if ($category != '0' && !empty($category_id = Hashids::decode($category))) {
+        if ($category != '0' && !empty($category_id = hashid_decode($category))) {
             $builder->where('category_id', '=', $category_id);
         }
 
@@ -79,7 +78,7 @@ class ShopController extends Controller
         //生成返回数据
         $data = $shops->map(function ($item, $key){
             return [
-                'id' => Hashids::encode($item['id']),
+                'id' => hashid_encode($item['id']),
                 'name' => $item['name'],
                 'good' => $item->goodCommentCount(),
                 'bad' => $item->badCommentCount(),
