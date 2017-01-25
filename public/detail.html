@@ -70,7 +70,7 @@
           <img src="img/card-header.png" alt="">
           <div class="card-heading"><h1 id="name"></h1></div>
         </div>
-        <div class="row">
+        <div class="row" id="progressBar">
          <div class="col-xs-6 col-sm-6">
            <h3 class="with-padding" style="color: #EA644A">好评
              <span class="label label-badge" id="good"></span>
@@ -95,7 +95,7 @@
 
       <!-- END. header -->
       <hr>
-      <div class="container">
+      <div class="container" id="commentsRow">
         <div class="comments">
           <header>
             <div class="pull-right">
@@ -119,7 +119,7 @@
               </a>
               <div class="form">
                 <div class="form-group">
-                  <textarea class="form-control new-comment-text" rows="2" placeholder="撰写评价前请先登录..."></textarea>
+                  <textarea class="form-control new-comment-text" rows="6" placeholder="撰写评价前请先登录..."></textarea>
                 </div>
                 <div class="form-group comment-user">
                   <div class="row">
@@ -130,12 +130,14 @@
                       </div>
                     </div>
                     <div class="col-md-4">
-                      <label class="radio-inline">
-                        <input type="radio" name="commentType"> 好评
-                      </label>
-                      <label class="radio-inline">
-                        <input type="radio" name="commentType"> 差评
-                      </label>
+                      <div id="commentType" class="btn-group">
+                        <button type="button" class="btn btn-danger" value="1" onclick=
+                        "$(this).addClass('btn-danger active').siblings().removeClass('btn-warning active');"
+                        >好评</button>
+                        <button type="button" class="btn btn-warning" value="2" onclick=
+                        "$(this).addClass('btn-warning active').siblings().removeClass('btn-danger active');"
+                        >差评</button>
+                      </div>
                     </div>
                     <div class="col-md-3">
                       <button class="btn btn-block btn-primary disabled" onclick="comment()">
@@ -152,7 +154,23 @@
     </div>
   </div>
 </div>
-
+<div class="modal fade" id="commentSuccess">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+        <h4 class="modal-title">发布成功</h4>
+      </div>
+      <div class="modal-body">
+        <p>感谢您的评价!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <a type="button" class="btn btn-primary" href="/">返回主页</a>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="loading-modal"></div>
 <footer>
   <div class="container text-center">

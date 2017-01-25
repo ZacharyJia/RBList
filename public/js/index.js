@@ -72,10 +72,7 @@ function showShop(curPage) {
               .append(newLike)
               .append(newDislike)
               .append(newCommentCount);
-          var url = "/detail.html?id=" + response.data.shop_list[i].id +
-            "&name=" + response.data.shop_list[i].name +
-            "&good=" + response.data.shop_list[i].good +
-            "&bad=" + response.data.shop_list[i].bad;
+          var url = "/detail.html?id=" + response.data.shop_list[i].id;
           newCard = $("<a></a>")
             .attr("class", "card")
             .attr("id", response.data.shop_list[i].id)

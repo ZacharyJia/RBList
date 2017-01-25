@@ -13,19 +13,35 @@ var getUrlParameter = function getUrlParameter(sParam) {
   }
 };
 var shop_id = getUrlParameter("id");
-var name = getUrlParameter("name");
-var good = getUrlParameter("good");
-var bad = getUrlParameter("bad");
-$("#name").text(name);
-$("#good").text(good);
-$("#bad").text(bad);
-$(".progress-bar-danger").css({"width": parseInt(good)/(parseInt(good)+parseInt(bad))*100 + "%"});
-$(".progress-bar-warning").css({"width": 100-(parseInt(good)/(parseInt(good)+parseInt(bad))*100) + "%"});
-$(".breadcrumb li:eq(2)").text(name);
+var first_load = 0;
+showShopDetail(shop_id);
+function showShopDetail(shop_id){
+  $.ajax({
+    url:"/api/shoplist",
+    success: function(response){
+      if(response.code === "200"){
+        this_shop=response.data.shop_list;
+        for(var i=0;i<this_shop.length;i++)
+          if(this_shop[i].id === shop_id){
+            var name = this_shop[i].name;
+            var good = this_shop[i].good;
+            var bad = this_shop[i].bad;
+            $("#name").text(name);
+            $("#good").text(good);
+            $("#bad").text(bad);
+            $(".progress-bar-danger").css({"width": parseInt(good)/(parseInt(good)+parseInt(bad))*100 + "%"});
+            $(".progress-bar-warning").css({"width": 100-(parseInt(good)/(parseInt(good)+parseInt(bad))*100) + "%"});
+            $(".breadcrumb li:eq(2)").text(name);
+            break;
+          }
+      }
+    }
+  });
+}
 function showComment(curPage) {
   $.ajax({
     url: "/api/commentlist",
-    data: { "shop_id": shop_id, "curPage": curPage },
+    data: { "shop_id": shop_id, "curPage": curPage, pageSize: 10 },
     success: function (response) {
       if (response.code === "200") {
         $(".comments-list").replaceWith("<section class='comments-list' ></section>");
@@ -57,6 +73,11 @@ function showComment(curPage) {
       }
     }
   });
+  if(first_load++){
+    $("html, body").animate({
+      scrollTop: $("#commentsRow").offset().top - 65
+    }, "slow");
+  }
 }
 
 function commentLoginStatus(username) {
@@ -68,14 +89,49 @@ function commentLoginStatus(username) {
 };
 function comment() {
   var commentContent = $("textarea").val();
+  var commentType;
+  if($("#commentType > button.active").val() == 1)
+    commentType = 1;
+  else if($("#commentType > button.active").val() == 2)
+    commentType= 2;
+  else 
+  {
+    new $.zui.Messager('您忘了点评价类型', {
+      icon:'hand-down',
+      type: 'primary',
+      close: true,
+      placement: 'center'
+    }).show();
+    return false;
+  }
 
+  if(commentContent === ""){
+      new $.zui.Messager('您忘了填写评论', {
+      icon:'hand-down',
+      type: 'primary',
+      close: true,
+      placement: 'center'
+    }).show();
+    return false;
+  }
   $.ajax({
     url: "/api/comment",
-    data: { "shop_id": shop_id, "content": commentContent, "type": 1 },
+    data: { "shop_id": shop_id, "content": commentContent, "type": commentType },
     success: function (response) {
-      alert("done");
+      $('#commentSuccess').modal();
+      $('#commentSuccess').on('hidden.zui.modal', function() {
+         showShopDetail(shop_id);
+         showComment(1);
+         $("textarea").val("");
+         $("#commentType > button").removeClass("active");
+         $("#commentType > button:nth-child(1)").addClass("btn-danger");
+         $("#commentType > button:nth-child(2)").addClass("btn-warning");
+         $("html, body").animate({
+            scrollTop: $("#progressBar").offset().top - 65
+          }, "slow");
+      })
     }
-  })
+  });
 }
 
 showComment(1);
