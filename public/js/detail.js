@@ -15,22 +15,22 @@ var getUrlParameter = function getUrlParameter(sParam) {
 var shop_id = getUrlParameter("id");
 var first_load = 0;
 showShopDetail(shop_id);
-function showShopDetail(shop_id){
+function showShopDetail(shop_id) {
   $.ajax({
-    url:"/api/shoplist",
-    success: function(response){
-      if(response.code === "200"){
-        this_shop=response.data.shop_list;
-        for(var i=0;i<this_shop.length;i++)
-          if(this_shop[i].id === shop_id){
+    url: "/api/shoplist",
+    success: function (response) {
+      if (response.code === "200") {
+        this_shop = response.data.shop_list;
+        for (var i = 0; i < this_shop.length; i++)
+          if (this_shop[i].id === shop_id) {
             var name = this_shop[i].name;
             var good = this_shop[i].good;
             var bad = this_shop[i].bad;
             $("#name").text(name);
             $("#good").text(good);
             $("#bad").text(bad);
-            $(".progress-bar-danger").css({"width": parseInt(good)/(parseInt(good)+parseInt(bad))*100 + "%"});
-            $(".progress-bar-warning").css({"width": 100-(parseInt(good)/(parseInt(good)+parseInt(bad))*100) + "%"});
+            $(".progress-bar-danger").css({ "width": parseInt(good) / (parseInt(good) + parseInt(bad)) * 100 + "%" });
+            $(".progress-bar-warning").css({ "width": 100 - (parseInt(good) / (parseInt(good) + parseInt(bad)) * 100) + "%" });
             $(".breadcrumb li:eq(2)").text(name);
             break;
           }
@@ -64,7 +64,7 @@ function showComment(curPage) {
             .append(newCommentText)
             .append(newCommentReply);
           newComment = $("<div class='comment'></div>").append(newAvatar).append(newContent);
-          if(response.data.comment_list[i].type === "good")
+          if (response.data.comment_list[i].type === "good")
             newComment.addClass("good");
           else newComment.addClass("bad");
           $(".comments-list").append(newComment);
@@ -73,7 +73,7 @@ function showComment(curPage) {
       }
     }
   });
-  if(first_load++){
+  if (first_load++) {
     $("html, body").animate({
       scrollTop: $("#commentsRow").offset().top - 65
     }, "slow");
@@ -90,14 +90,13 @@ function commentLoginStatus(username) {
 function comment() {
   var commentContent = $("textarea").val();
   var commentType;
-  if($("#commentType > button.active").val() == 1)
+  if ($("#commentType > button.active").val() == 1)
     commentType = 1;
-  else if($("#commentType > button.active").val() == 2)
-    commentType= 2;
-  else 
-  {
+  else if ($("#commentType > button.active").val() == 2)
+    commentType = 2;
+  else {
     new $.zui.Messager('您忘了点评价类型', {
-      icon:'hand-down',
+      icon: 'hand-down',
       type: 'primary',
       close: true,
       placement: 'center'
@@ -105,9 +104,9 @@ function comment() {
     return false;
   }
 
-  if(commentContent === ""){
-      new $.zui.Messager('您忘了填写评论', {
-      icon:'hand-down',
+  if (commentContent === "") {
+    new $.zui.Messager('您忘了填写评论', {
+      icon: 'hand-down',
       type: 'primary',
       close: true,
       placement: 'center'
@@ -119,16 +118,16 @@ function comment() {
     data: { "shop_id": shop_id, "content": commentContent, "type": commentType },
     success: function (response) {
       $('#commentSuccess').modal();
-      $('#commentSuccess').on('hidden.zui.modal', function() {
-         showShopDetail(shop_id);
-         showComment(1);
-         $("textarea").val("");
-         $("#commentType > button").removeClass("active");
-         $("#commentType > button:nth-child(1)").addClass("btn-danger");
-         $("#commentType > button:nth-child(2)").addClass("btn-warning");
-         $("html, body").animate({
-            scrollTop: $("#progressBar").offset().top - 65
-          }, "slow");
+      $('#commentSuccess').on('hidden.zui.modal', function () {
+        showShopDetail(shop_id);
+        showComment(1);
+        $("textarea").val("");
+        $("#commentType > button").removeClass("active");
+        $("#commentType > button:nth-child(1)").addClass("btn-danger");
+        $("#commentType > button:nth-child(2)").addClass("btn-warning");
+        $("html, body").animate({
+          scrollTop: $("#progressBar").offset().top - 65
+        }, "slow");
       })
     }
   });

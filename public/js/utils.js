@@ -13,11 +13,10 @@ function pager(callFuncName, totalPage, curPage) {
       .attr("href", "javascript:void(0);");
     pageNumLi = $("<li></li>").append(pageNum);
     $(".pager").append(pageNumLi);
-    if (i === curPage)
-     {
-       pageNumLi.attr("class", "active");
-       pageNumLi.children().removeAttr("onclick");
-     }
+    if (i === curPage) {
+      pageNumLi.attr("class", "active");
+      pageNumLi.children().removeAttr("onclick");
+    }
 
   }
   pageNext = $("<a>»</a>");
@@ -37,7 +36,7 @@ function checkLoginStatus(callback) {
       if (userinfo.code === "200" && userinfo.data.verified === 1)
         callback(userinfo.data.username);
       else callback(false);
-   }
+    }
   });
 }
 
@@ -76,11 +75,11 @@ $(document).ready(function () {
           var categoryName = item.category_list.name;
           var categoryId = item.category_list.id;
           var content = $("<li></li>").append("<a></a>").find("a")
-          .attr("href","javascript:void(0)")
-          .attr("onclick","setCategory('" + categoryId + 
-                "');$(this).parent().siblings().removeClass('active').end().toggleClass('active');")
-          .text(categoryName)
-          .end();
+            .attr("href", "javascript:void(0)")
+            .attr("onclick", "setCategory('" + categoryId +
+            "');$(this).parent().siblings().removeClass('active').end().toggleClass('active');")
+            .text(categoryName)
+            .end();
           $("#allCategory").append(content);
         })
       }
@@ -90,6 +89,6 @@ $(document).ready(function () {
 
 $body = $("body");
 $(document).on({
-  ajaxStart: function() { $body.addClass("loading");},
-    ajaxStop: function() { $body.removeClass("loading");}    
+  ajaxStart: function () { $body.addClass("loading"); },
+  ajaxStop: function () { $body.removeClass("loading"); }
 });
