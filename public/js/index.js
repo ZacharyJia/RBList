@@ -88,7 +88,7 @@ function showShop(curPage) {
 var first_load = 0;
 $(window).scroll(function () {
   if ($(this).scrollTop() > 0) {
-    $('.masthead').fadeOut('slow', function () {
+    $('.masthead').slideUp('slow', function () {
       if (!first_load++)
         $("html, body").animate({ scrollTop: 0 }, "fast");
     });
