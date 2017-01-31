@@ -44,15 +44,26 @@ function navLoginStatus(username) {
   if (username) {
     $("#nav_login").hide();
     $("#nav_register").hide();
-    var newUserStatus = $("<a></a>").attr("href", "#").text(username).appendTo($("<li></li>"));
-    $("#status").append(newUserStatus.parent());
+    var newUserStatus = $("<a class='dropdown-toggle' data-toggle='dropdown'></a>")
+      .attr("href", "#")
+      .text(username);
+    var newUserLogoutUl =$("<li></li>").append("<ul class='dropdown-menu' role='menu'></ul>").children();
+    var newUserLogoutA = $("<a href='http://rblist/logout'></a>")
+      .attr("onclick","event.preventDefault();$('#logout-form').submit()")
+      .text("注销")
+    var newUserLogout = $("<li></li>")
+    .html("<form id=\"logout-form\" action=\"http://rblist/logout\" method=\"POST\" style=\"display: none;\"><input type=\"hidden\" name=\"_token\"></form>")
+    .append(newUserLogoutA);
+    newUserLogoutUl.append(newUserLogout);
+    var newUserLi = $("<li class='dropdown'></li>").append(newUserStatus).append(newUserLogoutUl);
+    $("#status").append(newUserLi);
   }
 }
 
 $.ajaxSetup({
-  headers: {
-    'X-XSRF-TOKEN': $.cookie('XSRF-TOKEN')
-  },
+  // headers: {
+  //   'X-XSRF-TOKEN': $.cookie('XSRF-TOKEN')
+  // },
   type: "POST",
   dataType: "json",
 });

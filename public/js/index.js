@@ -1,5 +1,10 @@
 var curType = 0;
 var curCategory = 0;
+function cleanFilter(){
+  curType=0;
+  curCategory=0;
+  // .....
+}
 function setCurType(x) {
   curCategory = 0;
   $("#allCategory > li").removeClass("active");
