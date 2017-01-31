@@ -1,6 +1,8 @@
 var curType = 0;
 var curCategory = 0;
 function setCurType(x) {
+  curCategory = 0;
+  $("#allCategory > li").removeClass("active");
   if (curType !== x) {
     curType = x;
     if (x === 1) {
@@ -17,10 +19,13 @@ function setCurType(x) {
   showShop(1);
 }
 function setCategory(id) {
-  if (curCategory !== id) curCategory = id;
+  if (curCategory !== id){ curCategory = id;}
   else curCategory = 0;
+  curType = 0;
+  setNavColor("#333", "#fff");
+  $("#red").removeClass("active");
+  $("#black").removeClass("active");
   showShop(1);
-
 }
 function setNavColor(fontColor, bgColor) {
   $(".navbar-default").css("background-color", bgColor);
@@ -85,14 +90,14 @@ function showShop(curPage) {
     }
   });
 }
-var first_load = 0;
-$(window).scroll(function () {
-  if ($(this).scrollTop() > 0) {
-    $('.masthead').slideUp('slow', function () {
-      if (!first_load++)
-        $("html, body").animate({ scrollTop: 0 }, "fast");
-    });
-  }
-});
+// var first_load = 0;
+// $(window).scroll(function () {
+//   if ($(this).scrollTop() > 0) {
+//     $('.masthead').slideUp('slow', function () {
+//       if (!first_load++)
+//         $("html, body").animate({ scrollTop: 0 }, "fast");
+//     });
+//   }
+// });
 
 showShop(1);
