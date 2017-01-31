@@ -58,14 +58,7 @@ $.ajaxSetup({
 });
 
 $(document).ready(function () {
-  $('.contentwrap').css({ 'margin-top': (($('.navbar-fixed-top').height()) + 10) + 'px' });
-  $(window).resize(function () {
-    $('.contentwrap').css({ 'margin-top': (($('.navbar-fixed-top').height()) + 10) + 'px' });
-  });
-
   checkLoginStatus(navLoginStatus);
-
-
 
   $.ajax({
     url: "/api/categorylist",
@@ -87,8 +80,7 @@ $(document).ready(function () {
   });
 });
 
-$body = $("body");
 $(document).on({
-  ajaxStart: function () { $body.addClass("loading"); },
-  ajaxStop: function () { $body.removeClass("loading"); }
+  ajaxStart: function () { $("body").addClass("loading"); },
+  ajaxStop: function () { $("body").removeClass("loading"); }
 });

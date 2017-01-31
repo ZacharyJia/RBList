@@ -145,4 +145,7 @@ body.loading .loading-modal {
     -moz-background-size: 100px 100px;
     background-size: 100px 100px;
 }
+.contentwrap {
+  margin-top: 84px;
+}
 

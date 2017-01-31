@@ -26,6 +26,7 @@ function showShopDetail(shop_id) {
             var name = this_shop[i].name;
             var good = this_shop[i].good;
             var bad = this_shop[i].bad;
+            $("head > title").text(name);
             $("#name").text(name);
             $("#good").text(good);
             $("#bad").text(bad);
@@ -47,6 +48,8 @@ function showComment(curPage) {
         $(".comments-list").replaceWith("<section class='comments-list' ></section>");
         var comment_list_len = response.data.comment_list.length;
         var totalPage = response.data.total_page;
+        if(comment_list_len === 0) 
+          $(".comments-list").html("<div class='comment'><h3 class='text-center text-muted'>还没有人评论T_T</h3></div>");
         for (var i = 0; i < comment_list_len; i++) {
           newAvatar = $("<a class='avatar'></a>").append("<i class='icon-user icon-2x'></i>");
           newCommentTime = $("<div class='pull-right text-muted'></div>").text("2016");
