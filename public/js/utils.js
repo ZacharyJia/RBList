@@ -52,7 +52,8 @@ function navLoginStatus(username) {
       .attr("onclick","event.preventDefault();$('#logout-form').submit()")
       .text("注销")
     var newUserLogout = $("<li></li>")
-    .html("<form id=\"logout-form\" action=\"http://rblist/logout\" method=\"POST\" style=\"display: none;\"><input type=\"hidden\" name=\"_token\"></form>")
+    .html("<form id=\"logout-form\" action=\"http://rblist/logout\" method=\"POST\" style=\"display: none;\">"+
+          "<input type=\"hidden\" name=\"_token\"></form>")
     .append(newUserLogoutA);
     newUserLogoutUl.append(newUserLogout);
     var newUserLi = $("<li class='dropdown'></li>").append(newUserStatus).append(newUserLogoutUl);
@@ -80,8 +81,7 @@ $(document).ready(function () {
           var categoryId = item.category_list.id;
           var content = $("<li></li>").append("<a></a>").find("a")
             .attr("href", "javascript:void(0)")
-            .attr("onclick", "setCategory('" + categoryId +
-            "');$(this).parent().siblings().removeClass('active').end().toggleClass('active');")
+            .attr("id", categoryId)
             .text(categoryName)
             .end();
           $("#allCategory").append(content);

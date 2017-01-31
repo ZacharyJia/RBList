@@ -1,19 +1,24 @@
 var curType = 0;
 var curCategory = 0;
-function cleanFilter(){
-  curType=0;
-  curCategory=0;
-  // .....
-}
-function setCurType(x) {
-  curCategory = 0;
+
+function cleanFilter() {
+  setNavColor("#333", "#fff");
+  $("#red").removeClass("active");
+  $("#black").removeClass("active");
   $("#allCategory > li").removeClass("active");
+
+}
+
+function setCurType(x) {
+  cleanFilter();
   if (curType !== x) {
     curType = x;
     if (x === 1) {
+      $("#red").addClass("active");
       setNavColor("#F1F1F1", "#EA644A");
     }
-    else {
+    else if (x === 2) {
+      $("#black").addClass("active");
       setNavColor("#F1F1F1", "#BD7B46");
     }
   }
@@ -21,17 +26,10 @@ function setCurType(x) {
     curType = 0;
     setNavColor("#333", "#fff");
   }
+  curCategory = 0;
   showShop(1);
 }
-function setCategory(id) {
-  if (curCategory !== id){ curCategory = id;}
-  else curCategory = 0;
-  curType = 0;
-  setNavColor("#333", "#fff");
-  $("#red").removeClass("active");
-  $("#black").removeClass("active");
-  showShop(1);
-}
+
 function setNavColor(fontColor, bgColor) {
   $(".navbar-default").css("background-color", bgColor);
   $(".navbar-default .navbar-brand").css("color", fontColor);
@@ -104,5 +102,30 @@ function showShop(curPage) {
 //     });
 //   }
 // });
+
+$(document).on("click", "#allCategory > li > a", function () {
+  cleanFilter();
+  this_id = $(this).attr("id");
+  if (curCategory !== this_id) {
+    $(this).parent().siblings().removeClass('active').end().toggleClass('active');
+    curCategory = this_id;
+  }
+  else {
+    curCategory = 0;
+  }
+  curType = 0;
+  showShop(1);
+});
+
+$("#red").click(function () {
+  if (curType == 1)
+    setCurType(0);
+  else setCurType(1);
+});
+$("#black").click(function () {
+  if (curType == 2)
+    setCurType(0);
+  else setCurType(2);
+});
 
 showShop(1);
