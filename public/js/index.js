@@ -1,32 +1,30 @@
 var curType = 0;
 var curCategory = 0;
-
+//清空筛选条件 & 样式
 function cleanFilter() {
+  curType = 0;
+  curCategory = 0;
   setNavColor("#333", "#fff");
   $("#red").removeClass("active");
   $("#black").removeClass("active");
   $("#allCategory > li").removeClass("active");
-
 }
-
+//设置筛选条件 AND 刷新商店
 function setCurType(x) {
-  cleanFilter();
-  if (curType !== x) {
-    curType = x;
-    if (x === 1) {
-      $("#red").addClass("active");
-      setNavColor("#F1F1F1", "#EA644A");
-    }
-    else if (x === 2) {
-      $("#black").addClass("active");
-      setNavColor("#F1F1F1", "#BD7B46");
-    }
+  if (x === 1) {
+    cleanFilter();
+    $("#red").addClass("active");
+    setNavColor("#F1F1F1", "#EA644A");
+  }
+  else if (x === 2) {
+    cleanFilter();
+    $("#black").addClass("active");
+    setNavColor("#F1F1F1", "#BD7B46");
   }
   else {
-    curType = 0;
-    setNavColor("#333", "#fff");
+    cleanFilter();
   }
-  curCategory = 0;
+  curType = x;
   showShop(1);
 }
 
@@ -38,7 +36,7 @@ function setNavColor(fontColor, bgColor) {
     $("ul:nth-child(1) > .active > a").css("color", bgColor);
 
 }
-
+//显示/刷新商店
 function showShop(curPage) {
   $.ajax({
     url: "/api/shoplist",
@@ -92,7 +90,34 @@ function showShop(curPage) {
       }
     }
   });
+
+  if (curType !== 0 || curCategory !== 0) {
+    var messagerText, messagerColor;
+    if (curType === 1) { messagerText = "红店优先"; messagerColor = "danger" }
+    else if (curType === 2) { messagerText = "黑店优先"; messagerColor = "important" }
+    else {
+      categoryId = "#" + curCategory;
+      messagerText = $(categoryId).text();
+      messagerColor = "primary";
+    }
+    msg = new $.zui.Messager('当前筛选条件: ' + messagerText, {
+      type: messagerColor,
+      placement: 'bottom-left',
+      time: 2000,
+      close: true,
+      actions: [{
+        name: 'undo',
+        icon: 'undo',
+        text: '清除',
+        action: function () {
+          cleanFilter();
+          showShop(1);
+        }
+      }]
+    }).show();
+  }
 }
+//滚动监听
 // var first_load = 0;
 // $(window).scroll(function () {
 //   if ($(this).scrollTop() > 0) {
@@ -103,20 +128,40 @@ function showShop(curPage) {
 //   }
 // });
 
+//类别填充
+$(document).ready(function () {
+  $.ajax({
+    url: "/api/categorylist",
+    success: function (list) {
+      if (list.code === "200") {
+        $.each(list.data, function (i, item) {
+          var categoryName = item.category_list.name;
+          var categoryId = item.category_list.id;
+          var content = $("<li></li>").append("<a></a>").find("a")
+            .attr("href", "javascript:void(0)")
+            .attr("id", categoryId)
+            .text(categoryName)
+            .end();
+          $("#allCategory").append(content);
+        })
+      }
+    }
+  });
+});
+// 筛选条件：类别
 $(document).on("click", "#allCategory > li > a", function () {
-  cleanFilter();
   this_id = $(this).attr("id");
   if (curCategory !== this_id) {
-    $(this).parent().siblings().removeClass('active').end().toggleClass('active');
+    cleanFilter();
+    $(this).parent().toggleClass('active');
     curCategory = this_id;
   }
   else {
-    curCategory = 0;
+    cleanFilter();
   }
-  curType = 0;
   showShop(1);
 });
-
+// 筛选条件：红/黑 优先
 $("#red").click(function () {
   if (curType == 1)
     setCurType(0);
@@ -127,5 +172,5 @@ $("#black").click(function () {
     setCurType(0);
   else setCurType(2);
 });
-
+// 初始化
 showShop(1);

@@ -1,3 +1,4 @@
+//翻页键
 function pager(callFuncName, totalPage, curPage) {
   $(".pager").replaceWith("<ul class='pager'></ul>");
   pagePre = $("<a>«</a>");
@@ -17,7 +18,6 @@ function pager(callFuncName, totalPage, curPage) {
       pageNumLi.attr("class", "active");
       pageNumLi.children().removeAttr("onclick");
     }
-
   }
   pageNext = $("<a>»</a>");
   if (curPage === totalPage)
@@ -29,6 +29,7 @@ function pager(callFuncName, totalPage, curPage) {
   $(".pager").append(pageNextLi);
 }
 
+//登录状态
 function checkLoginStatus(callback) {
   $.ajax({
     url: "/api/userinfo",
@@ -39,7 +40,7 @@ function checkLoginStatus(callback) {
     }
   });
 }
-
+//状态栏登录状态
 function navLoginStatus(username) {
   if (username) {
     $("#nav_login").hide();
@@ -47,20 +48,21 @@ function navLoginStatus(username) {
     var newUserStatus = $("<a class='dropdown-toggle' data-toggle='dropdown'></a>")
       .attr("href", "#")
       .text(username);
-    var newUserLogoutUl =$("<li></li>").append("<ul class='dropdown-menu' role='menu'></ul>").children();
+    var newUserLogoutUl = $("<li></li>").append("<ul class='dropdown-menu' role='menu'></ul>").children();
     var newUserLogoutA = $("<a href='http://rblist/logout'></a>")
-      .attr("onclick","event.preventDefault();$('#logout-form').submit()")
+      .attr("onclick", "event.preventDefault();$('#logout-form').submit()")
       .text("注销")
     var newUserLogout = $("<li></li>")
-    .html("<form id=\"logout-form\" action=\"http://rblist/logout\" method=\"POST\" style=\"display: none;\">"+
-          "<input type=\"hidden\" name=\"_token\"></form>")
-    .append(newUserLogoutA);
+      .html("<form id=\"logout-form\" action=\"http://rblist/logout\" method=\"POST\" style=\"display: none;\">" +
+      "<input type=\"hidden\" name=\"_token\"></form>")
+      .append(newUserLogoutA);
     newUserLogoutUl.append(newUserLogout);
     var newUserLi = $("<li class='dropdown'></li>").append(newUserStatus).append(newUserLogoutUl);
     $("#status").append(newUserLi);
   }
 }
 
+//设置AJAX默认设置
 $.ajaxSetup({
   // headers: {
   //   'X-XSRF-TOKEN': $.cookie('XSRF-TOKEN')
@@ -69,26 +71,9 @@ $.ajaxSetup({
   dataType: "json",
 });
 
+//检查登录状态 & 初始化
 $(document).ready(function () {
   checkLoginStatus(navLoginStatus);
-
-  $.ajax({
-    url: "/api/categorylist",
-    success: function (list) {
-      if (list.code === "200") {
-        $.each(list.data, function (i, item) {
-          var categoryName = item.category_list.name;
-          var categoryId = item.category_list.id;
-          var content = $("<li></li>").append("<a></a>").find("a")
-            .attr("href", "javascript:void(0)")
-            .attr("id", categoryId)
-            .text(categoryName)
-            .end();
-          $("#allCategory").append(content);
-        })
-      }
-    }
-  });
 });
 
 $(document).on({

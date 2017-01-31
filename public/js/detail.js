@@ -1,3 +1,4 @@
+// 获取URL
 var getUrlParameter = function getUrlParameter(sParam) {
   var sPageURL = decodeURIComponent(window.location.search.substring(1)),
     sURLVariables = sPageURL.split('&'),
@@ -14,6 +15,8 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 var shop_id = getUrlParameter("id");
 var first_load = 0;
+
+// 商品信息显示
 showShopDetail(shop_id);
 function showShopDetail(shop_id) {
   $.ajax({
@@ -39,6 +42,8 @@ function showShopDetail(shop_id) {
     }
   });
 }
+
+// 评论显示
 function showComment(curPage) {
   $.ajax({
     url: "/api/commentlist",
@@ -48,7 +53,7 @@ function showComment(curPage) {
         $(".comments-list").replaceWith("<section class='comments-list' ></section>");
         var comment_list_len = response.data.comment_list.length;
         var totalPage = response.data.total_page;
-        if(comment_list_len === 0) 
+        if (comment_list_len === 0)
           $(".comments-list").html("<div class='comment'><h3 class='text-center text-muted'>还没有人评论T_T</h3></div>");
         for (var i = 0; i < comment_list_len; i++) {
           newAvatar = $("<a class='avatar'></a>").append("<i class='icon-user icon-2x'></i>");
@@ -83,6 +88,7 @@ function showComment(curPage) {
   }
 }
 
+//评论登录状态检查
 function commentLoginStatus(username) {
   if (username) {
     $("div.form-group.comment-user > div > div.col-md-5 > div").addClass("invisible");
@@ -90,6 +96,7 @@ function commentLoginStatus(username) {
     $("button.disabled").removeClass("disabled");
   }
 };
+//评论
 function comment() {
   var commentContent = $("textarea").val();
   var commentType;
@@ -135,10 +142,10 @@ function comment() {
     }
   });
 }
-
+// 评论初始化
 showComment(1);
-
+// 检查登录状态
 $(document).ready(function () {
   checkLoginStatus(commentLoginStatus);
-
+  
 })
