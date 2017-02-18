@@ -34,8 +34,17 @@ function checkLoginStatus(callback) {
   $.ajax({
     url: "/api/userinfo",
     success: function (userinfo) {
-      if (userinfo.code === "200" && userinfo.data.verified === 1)
+      if (userinfo.code === "200") {
+        if (userinfo.data.verified === 0)
+          verified_text = '您还没有验证邮箱 '+'<a href=\'http://mail.bjtu.edu.cn/\' class=\'text-muted\'>去验证</a>';
+          new $.zui.Messager(verified_text, {
+            type: 'info',
+            icon: 'warning-sign',
+            placement: 'top',
+            close: true
+          }).show();
         callback(userinfo.data.username);
+      }
       else callback(false);
     }
   });
