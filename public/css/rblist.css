@@ -1,0 +1,151 @@
+/*loading animation here*/
+.loading-modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url(../img/loading.gif) 
+                50% 50% 
+                no-repeat;
+}
+/*body.loading {
+    overflow: hidden;   
+}*/
+body.loading .loading-modal {
+    display: block;
+}
+
+/*masthead here*/
+.masthead,
+.masthead-header {
+  padding: 200px 0;
+  position: relative;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0,0,0,.1);
+  /*background-color: #3280fc;
+  background-repeat: repeat-x;*/
+}
+
+
+.masthead {
+  background-image: url(../img/header-bg.jpg);
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+
+  margin: 0 auto 30px;
+}
+.masthead h1 {
+  font-weight: 300;
+  line-height: 1;
+  color: #fff;
+}
+.masthead .lead {
+  margin: 0 auto 30px;
+  font-size: 20px;
+  color: #fff;
+}
+.masthead .version {
+  margin-top: -15px;
+  margin-bottom: 30px;
+  color: #6697e4;
+}
+.masthead .btn {
+  width: 100%;
+  padding: 15px 30px;
+  font-size: 20px;
+}
+
+@media (min-width: 480px) {
+  .masthead .btn {
+    width: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .masthead {
+    padding: 200px 0;
+  }
+  .masthead h1 {
+    font-size: 60px;
+  }
+  .masthead .lead {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 992px) {
+  .masthead .lead {
+    width: 80%;
+    font-size: 30px;
+  }
+}
+
+.masthead-header {
+  margin-bottom: 40px;
+  font-size: 20px;
+}
+.masthead-header h1 {
+  margin-top: 0;
+  color: #fff;
+}
+.masthead-header p {
+  margin-bottom: 0;
+  font-weight: 300;
+  line-height: 1.4;
+}
+.masthead-header .container {
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .masthead-header {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    font-size: 24px;
+    text-align: left;
+  }
+  .masthead-header h1 {
+    font-size: 60px;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 992px) {
+  .masthead-header h1,
+  .masthead-header p {
+    margin-right: 380px;
+  }
+}
+
+.good {
+    background-image: url(/img/good.png);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: top right;
+    -webkit-background-size: 100px 100px;
+    -moz-background-size: 100px 100px;
+    background-size: 100px 100px;
+}
+.bad {
+    background-image: url(/img/bad.png);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: top right;
+    -webkit-background-size: 100px 100px;
+    -moz-background-size: 100px 100px;
+    background-size: 100px 100px;
+}
+.contentwrap {
+  margin-top: 84px;
+}
+
