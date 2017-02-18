@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DETAIL</title>
+  <link href="css/zui.css" rel="stylesheet" />
+  <link href="css/rblist.css" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- 移动设备上的导航切换按钮 -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">切换导航</span>
+          <span class="icon icon-bars icon-2x"></span>
+        </button>
+        <!-- 品牌名称或logo -->
+        <a class="navbar-brand" href="/">
+          <span class="icon icon-diamond icon-2x"></span>
+          <span>交大红黑榜</span>
+        </a>
+      </div>
+        <!-- 右侧的导航项目 -->
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right" id="status">
+          <li id="nav_login">
+            <a href="login">登陆</a>
+          </li>
+          <li id="nav_register">
+            <a href="register">注册</a>
+          </li>
+        </ul>
+      </div><!-- END .navbar-collapse -->
+    </div>
+  </nav>
+  <!-- END .navbar -->
+  <div class="container contentwrap">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+        <ol class="breadcrumb">
+          <li><a href="/"><i class="icon icon-home"></i> 主页</a></li>
+          <li><a href="#"></a>类别</li>
+          <li class="active"></li>
+        </ol>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+        <div class="card" href="###">
+          <img src="img/card-header.png" alt="">
+          <div class="card-heading"><h1 id="name"></h1></div>
+        </div>
+        <div class="row" id="progressBar">
+         <div class="col-xs-6 col-sm-6">
+           <h3 class="with-padding" style="color: #EA644A">好评
+             <span class="label label-badge" id="good"></span>
+           </h3>
+           
+         </div>
+         <div class="col-xs-6 col-sm-6 pull-right">
+           <h3 class="pull-right with-padding" style="color: #f1a325">差评
+             <span class="label label-badge" id="bad"></span>
+           </h3>
+           
+         </div>
+       </div>
+       <div class="progress">
+        <div class="progress-bar progress-bar-danger">
+        </div>
+        <div class="progress-bar progress-bar-warning">
+        </div>
+        
+      </div>
+      
+
+      <!-- END. header -->
+      <hr>
+      <div class="container" id="commentsRow">
+        <div class="comments">
+          <header>
+            <div class="pull-right">
+              <a href="#commentReplyForm" class="btn btn-primary page-scroll">
+                <i class="icon-comment-alt"></i> 发表评价
+              </a>
+            </div>
+            <h3>所有评价</h3>
+          </header>
+          <section class="comments-list">
+            <!-- comment here -->
+          </section>
+          <div class="text-center">
+            <ul class="pager">
+            </ul>
+          </div>
+          <footer>
+            <div class="reply-form" id="commentReplyForm">
+              <a href="###" class="avatar">
+                <i class="icon-user icon-2x"></i>
+              </a>
+              <div class="form">
+                <div class="form-group">
+                  <textarea class="form-control new-comment-text" rows="6" placeholder="撰写评价前请先登录..."></textarea>
+                </div>
+                <div class="form-group comment-user">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="btn-group">
+                        <a class="btn btn-mini" href="/login">登录</a>
+                        <a class="btn btn-mini" href="/register">注册</a>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div id="commentType" class="btn-group">
+                        <button type="button" class="btn btn-danger" value="1" onclick=
+                        "$(this).addClass('btn-danger active').siblings().removeClass('btn-warning active');"
+                        >好评</button>
+                        <button type="button" class="btn btn-warning" value="2" onclick=
+                        "$(this).addClass('btn-warning active').siblings().removeClass('btn-danger active');"
+                        >差评</button>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <button class="btn btn-block btn-primary disabled" onclick="comment()">
+                        <i class="icon-ok"></i>发布
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="commentSuccess">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+        <h4 class="modal-title">发布成功</h4>
+      </div>
+      <div class="modal-body">
+        <p>感谢您的评价!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <a type="button" class="btn btn-primary" href="/">返回主页</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="loading-modal"></div>
+<footer>
+  <div class="container text-center">
+    <hr>
+    <div class="row">
+      <div class="col-md-6">
+        <h5><a href="#">About us</a></h5>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/zui.min.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/detail.js"></script>
+</body>
+
+</html>
