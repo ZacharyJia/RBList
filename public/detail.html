@@ -49,7 +49,7 @@
     </div>
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-        <div class="card" href="###">
+        <div class="card" href="#">
           <img src="img/card-header.png" alt="">
           <div class="card-heading"><h1 id="name"></h1></div>
         </div>
@@ -97,7 +97,7 @@
           </div>
           <footer>
             <div class="reply-form" id="commentReplyForm">
-              <a href="###" class="avatar">
+              <a href="#" class="avatar">
                 <i class="icon-user icon-2x"></i>
               </a>
               <div class="form">
@@ -106,16 +106,16 @@
                 </div>
                 <div class="form-group comment-user">
                   <div class="row">
-                    <div class="col-md-5">
-                      <div class="btn-group">
+                    <div class="col-md-6">
+                      <!--<div class="btn-group">
                         <a class="btn btn-mini" href="/login">登录</a>
                         <a class="btn btn-mini" href="/register">注册</a>
-                      </div>
+                      </div>-->
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div id="commentType" class="btn-group">
                         <button type="button" class="btn btn-danger" value="1" onclick=
-                        "$(this).addClass('btn-danger active').siblings().removeClass('btn-warning active');"
+                        "$(this).addCass('btn-danger active').siblings().removeClass('btn-warning active');"
                         >好评</button>
                         <button type="button" class="btn btn-warning" value="2" onclick=
                         "$(this).addClass('btn-warning active').siblings().removeClass('btn-danger active');"

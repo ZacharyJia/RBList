@@ -92,7 +92,7 @@ function showComment(curPage) {
 function commentLoginStatus() {
   var checked = $('#status > li.dropdown')
   if (checked) {
-    $("div.form-group.comment-user > div > div.col-md-5 > div").addClass("invisible");
+    // $("div.form-group.comment-user > div > div.col-md-5 > div").addClass("invisible");
     $("textarea").attr("placeholder", "撰写评论...");
     $("button.disabled").removeClass("disabled");
   }
