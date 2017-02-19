@@ -65,12 +65,12 @@ function showComment(curPage) {
           newCreator = $("<div></div>")
             .append(newCreatorLink);
           newCommentText = $("<div class='text'></div>").text(response.data.comment_list[i].content);
-          newCommentReply = $("<div class='actions'></div>").text("回复");
+          // newCommentReply = $("<div class='actions'></div>").text("回复");
           newContent = $("<div class='content'></div>")
             .append(newCommentTime)
             .append(newCreator)
             .append(newCommentText)
-            .append(newCommentReply);
+            // .append(newCommentReply);
           newComment = $("<div class='comment'></div>").append(newAvatar).append(newContent);
           if (response.data.comment_list[i].type === "good")
             newComment.addClass("good");
@@ -89,8 +89,9 @@ function showComment(curPage) {
 }
 
 //评论登录状态检查
-function commentLoginStatus(username) {
-  if (username) {
+function commentLoginStatus() {
+  var checked = $('#status > li.dropdown')
+  if (checked) {
     $("div.form-group.comment-user > div > div.col-md-5 > div").addClass("invisible");
     $("textarea").attr("placeholder", "撰写评论...");
     $("button.disabled").removeClass("disabled");
@@ -105,7 +106,7 @@ function comment() {
   else if ($("#commentType > button.active").val() == 2)
     commentType = 2;
   else {
-    new $.zui.Messager('您忘了点评价类型', {
+    new $.zui.Messager('您忘了选择评价类型', {
       icon: 'hand-down',
       type: 'primary',
       close: true,
@@ -146,6 +147,6 @@ function comment() {
 showComment(1);
 // 检查登录状态
 $(document).ready(function () {
-  checkLoginStatus(commentLoginStatus);
+  commentLoginStatus();
   
 })
