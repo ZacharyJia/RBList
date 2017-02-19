@@ -58,11 +58,11 @@ function navLoginStatus(username) {
       .attr("href", "#")
       .text(username);
     var newUserLogoutUl = $("<li></li>").append("<ul class='dropdown-menu' role='menu'></ul>").children();
-    var newUserLogoutA = $("<a href='http://rblist/logout'></a>")
+    var newUserLogoutA = $("<a href='logout'></a>")
       .attr("onclick", "event.preventDefault();$('#logout-form').submit()")
       .text("注销")
     var newUserLogout = $("<li></li>")
-      .html("<form id=\"logout-form\" action=\"http://rblist/logout\" method=\"POST\" style=\"display: none;\">" +
+      .html("<form id=\"logout-form\" action=\"logout\" method=\"POST\" style=\"display: none;\">" +
       "<input type=\"hidden\" name=\"_token\"></form>")
       .append(newUserLogoutA);
     newUserLogoutUl.append(newUserLogout);
