@@ -34,7 +34,7 @@ class User extends Authenticatable
         $token = str_random(32);
         $this->is_verified = false;
         $this->verify_token = $token;
-        $this->verify_token_time = Carbon::now()->addMinutes(30);
+        $this->verify_token_time = Carbon::now()->addMinutes(240);
         $this->save();
 
         return $token;
