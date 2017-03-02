@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => 'notice@zacharyjia.me',
+        'address' => 'zachary@bjtu.edu.cn',
         'name' => '交大红黑榜',
     ],
 
