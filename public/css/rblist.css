@@ -157,6 +157,14 @@ body.loading .loading-modal {
   color: rgba( 255, 255, 255, 0.9 );
   font-weight: 400;
 }
+.detail-footer{
+  margin-top: 40px;
+  padding-top: 20px;
+  background-color: #fff;
+  line-height: 40px;
+  color: rgba( 255, 255, 255, 0.9 );
+  font-weight: 400;
+}
 .footer-bgcolor{
   background-color: #3280fc;
 }
