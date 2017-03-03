@@ -133,18 +133,20 @@ function comment() {
     url: "/api/comment",
     data: { "shop_id": shop_id, "content": commentContent, "type": commentType },
     success: function (response) {
-      $('#commentSuccess').modal();
-      $('#commentSuccess').on('hidden.zui.modal', function () {
-        showShopDetail(shop_id);
-        showComment(1);
-        $("textarea").val("");
-        $("#commentType > button").removeClass("active");
-        $("#commentType > button:nth-child(1)").addClass("btn-danger");
-        $("#commentType > button:nth-child(2)").addClass("btn-warning");
-        $("html, body").animate({
-          scrollTop: $("#progressBar").offset().top - 65
-        }, "slow");
-      })
+      if (response.code === "200") {
+        $('#commentSuccess').modal();
+        $('#commentSuccess').on('hidden.zui.modal', function () {
+          showShopDetail(shop_id);
+          showComment(1);
+          $("textarea").val("");
+          $("#commentType > button").removeClass("active");
+          $("#commentType > button:nth-child(1)").addClass("btn-danger");
+          $("#commentType > button:nth-child(2)").addClass("btn-warning");
+          $("html, body").animate({
+            scrollTop: $("#progressBar").offset().top - 65
+          }, "slow");
+        });
+      }
     }
   });
 }
