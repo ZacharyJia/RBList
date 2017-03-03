@@ -14,7 +14,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
   }
 };
 var shop_id = getUrlParameter("id");
-var first_load = 0;
+var is_first_load = 1;
 
 // 商品信息显示
 showShopDetail(shop_id);
@@ -81,11 +81,12 @@ function showComment(curPage) {
       }
     }
   });
-  if (first_load++) {
+  if (!is_first_load) {
     $("html, body").animate({
       scrollTop: $("#commentsRow").offset().top - 65
     }, "slow");
   }
+  is_first_load = 0;
 }
 
 //评论登录状态检查
@@ -142,9 +143,6 @@ function comment() {
           $("#commentType > button").removeClass("active");
           $("#commentType > button:nth-child(1)").addClass("btn-danger");
           $("#commentType > button:nth-child(2)").addClass("btn-warning");
-          $("html, body").animate({
-            scrollTop: $("#progressBar").offset().top - 65
-          }, "slow");
         });
       }
     }
