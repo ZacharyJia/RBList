@@ -70,7 +70,7 @@ function showComment(curPage) {
             .append(newCommentTime)
             .append(newCreator)
             .append(newCommentText)
-            // .append(newCommentReply);
+          // .append(newCommentReply);
           newComment = $("<div class='comment'></div>").append(newAvatar).append(newContent);
           if (response.data.comment_list[i].type === "good")
             newComment.addClass("good");
@@ -90,11 +90,16 @@ function showComment(curPage) {
 
 //评论登录状态检查
 function commentLoginStatus() {
-  var checked = $('#status > li.dropdown')
+  checked = $("#nav_login").length;
   if (checked) {
-    // $("div.form-group.comment-user > div > div.col-md-5 > div").addClass("invisible");
-    $("textarea").attr("placeholder", "撰写评论...");
-    $("button.disabled").removeClass("disabled");
+    new $.zui.Messager("登录后才能发表评价哦~ " + '<a href=\'/login\'>去登录</a>', {
+      type: 'danger',
+      icon: 'warning-sign',
+      placement: 'center',
+      close: true
+    }).show();
+    $("textarea").attr("placeholder", "撰写评价前请先登录...");
+    $("#commentReplyForm > div > div.form-group.comment-user > div > div:nth-child(3) > button").addClass("disabled");
   }
 };
 //评论
@@ -143,10 +148,15 @@ function comment() {
     }
   });
 }
+
 // 评论初始化
 showComment(1);
-// 检查登录状态
-$(document).ready(function () {
-  commentLoginStatus();
-  
-})
+
+//评论登录状态检查
+var check_status_switch_on = 1;
+$("#commentReplyForm > div > div:nth-child(1) > textarea").click(function () {
+  if (check_status_switch_on) {
+    commentLoginStatus();
+    check_status_switch_on = 0;
+  }
+});
