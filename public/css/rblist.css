@@ -149,3 +149,20 @@ body.loading .loading-modal {
   margin-top: 84px;
 }
 
+.page-footer {
+  margin-top: 20px;
+  padding-top: 20px;
+  background-color: #3280fc;
+  line-height: 40px;
+  color: rgba( 255, 255, 255, 0.9 );
+  font-weight: 400;
+}
+.footer-bgcolor{
+  background-color: #3280fc;
+}
+.footer-color{
+  color: #fff;
+}
+.footer-copyright{
+  background-color: #145CCD;
+}

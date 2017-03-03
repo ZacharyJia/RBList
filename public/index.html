@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
+
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,6 +9,7 @@
   <link href="css/zui.css" rel="stylesheet" />
   <link href="css/rblist.css" rel="stylesheet" />
 </head>
+
 <body>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
@@ -28,13 +30,11 @@
         <!-- 一般导航项目 -->
         <ul class="nav navbar-nav ">
           <li id="red">
-            <a href="javascript:void(0)" 
-               class="page-scroll">&nbsp;&nbsp;红&nbsp;&nbsp;
+            <a href="javascript:void(0)" class="page-scroll">&nbsp;&nbsp;红&nbsp;&nbsp;
             </a>
           </li>
           <li id="black">
-            <a href="javascript:void(0)" 
-               class="page-scroll">&nbsp;&nbsp;黑&nbsp;&nbsp;
+            <a href="javascript:void(0)" class="page-scroll">&nbsp;&nbsp;黑&nbsp;&nbsp;
             </a>
           </li>
           <!-- 导航中的下拉菜单 -->
@@ -59,7 +59,7 @@
     </div>
   </nav>
   <!-- END .navbar -->
-  <div class="container">  
+  <div class="container">
     <main class="masthead">
       <!--<div class="container">-->
       <p class="lead">交大红黑榜</p>
@@ -73,7 +73,7 @@
     <div class="row" id="display_shop">
       <div class="cards">
         <!-- shop info here! -->
-      </div>      
+      </div>
       <div class="text-center">
         <ul class="pager">
           <!-- pager here -->
@@ -83,21 +83,62 @@
   </div>
 
   <div class="loading-modal"></div>
-  <footer>
-    <div class="container text-center">
-      <hr>
-      <div class="row">
-        <div class="col-md-6">
-          <h5><a href="#">About us</a></h5>
+
+  <footer class="page-footer">
+    <div class="footer-bgcolor">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-1"></div>
+          <div class="col-lg-6 col-sm-12">
+            <h2>关于交大红黑榜</h2>
+            <p>介绍交大红黑榜介绍交大红黑榜介绍交大红黑榜介绍交大红黑榜介绍交大红黑榜介绍交大红黑榜介绍交大红黑榜
+            </p>
+          </div>
+          <div class="col-lg-1"></div>
+          <div class="col-lg-4 col-sm-12">
+            <ul>
+              <li><a class="footer-color" href="https://st2633852.huoban.com/share/table/98cf102bc281765467b69827317d689c/form/create_item"
+                  target="_blank">反馈吐槽</a></li>
+              <li><a class="footer-color" href="#contact" data-toggle="modal">联系我们</a></li>
+              <li><a class="footer-color" href="/">占位</a></li>
+              <li><a class="footer-color" href="/">占位</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-11">
+          Copyright (c) 2017 imeow.tech. All Rights Reserved.
         </div>
       </div>
     </div>
   </footer>
+  <!--Contact me model-->
+  <div class="modal fade" id="contact">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+          <h4 class="modal-title">联系我们</h4>
+        </div>
+        <div class="modal-body">
+          <p>邮箱：</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="js/jquery-1.11.0.min.js"></script>
   <script src="js/jquery.cookie.js"></script>
   <script src="js/zui.min.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/index.js"></script>
-  </body>
+</body>
+
 </html>
