@@ -35,6 +35,7 @@ Route::post('/api/categorylist', 'CategoryController@getCategoryList');
 Route::post('/api/userinfo', 'UserController@userInfo');
 Route::post('/api/shoplist', 'ShopController@shopList');
 Route::post('/api/commentlist', 'CommentController@commentList');
+Route::post('/api/shopDetail', 'ShopController@getDetail');
 
 //需要登录的接口
 Route::group(['middleware' => ['auth', 'verify']], function (){
