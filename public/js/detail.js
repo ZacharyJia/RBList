@@ -43,7 +43,7 @@ function showComment(curPage) {
           $(".comments-list").html("<div class='comment'><h3 class='text-center text-muted'>还没有人评论T_T</h3></div>");
         for (var i = 0; i < comment_list_len; i++) {
           newAvatar = $("<a class='avatar'></a>").append("<i class='icon-user icon-2x'></i>");
-          newCommentTime = $("<div class='pull-right text-muted'></div>").text("2016");
+          newCommentTime = $("<div class='pull-right text-muted'></div>").text(response.data.comment_list[i].time);
           newCreatorText = $("<strong><strong>").text(response.data.comment_list[i].creator);
           newCreatorLink = $("<a></a>")
             .attr("href", "#")
