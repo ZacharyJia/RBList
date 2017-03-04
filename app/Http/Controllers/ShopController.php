@@ -122,7 +122,7 @@ class ShopController extends Controller
             'img' => '',
         ];
 
-        return $result;
+        return $this->success($result);
 
     }
 
