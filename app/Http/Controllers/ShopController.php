@@ -114,11 +114,15 @@ class ShopController extends Controller
             return $this->error('506', '参数错误');
         }
 
+
+
         $result = [
             'name' => $shop['name'],
             'desc' => $shop['desc'],
             'category_id' => hashid_encode($shop['category_id']),
             'category' => $shop->category->name,
+            'good_cnt' => $shop->goodCommentCount(),
+            'bad_cnt' => $shop->badCommentCount(),
             'img' => '',
         ];
 
