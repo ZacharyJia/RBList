@@ -1,18 +1,3 @@
-// 获取URL
-var getUrlParameter = function getUrlParameter(sParam) {
-  var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-    sURLVariables = sPageURL.split('&'),
-    sParameterName,
-    i;
-
-  for (i = 0; i < sURLVariables.length; i++) {
-    sParameterName = sURLVariables[i].split('=');
-
-    if (sParameterName[0] === sParam) {
-      return sParameterName[1] === undefined ? true : sParameterName[1];
-    }
-  }
-};
 var shop_id = getUrlParameter("id");
 var is_first_load = 1;
 
@@ -20,24 +5,25 @@ var is_first_load = 1;
 showShopDetail(shop_id);
 function showShopDetail(shop_id) {
   $.ajax({
-    url: "/api/shoplist",
+    url: "/api/shopDetail",
+    data: { "shop_id": shop_id },
     success: function (response) {
       if (response.code === "200") {
-        this_shop = response.data.shop_list;
-        for (var i = 0; i < this_shop.length; i++)
-          if (this_shop[i].id === shop_id) {
-            var name = this_shop[i].name;
-            var good = this_shop[i].good;
-            var bad = this_shop[i].bad;
-            $("head > title").text(name);
-            $("#name").text(name);
-            $("#good").text(good);
-            $("#bad").text(bad);
-            $(".progress-bar-danger").css({ "width": parseInt(good) / (parseInt(good) + parseInt(bad)) * 100 + "%" });
-            $(".progress-bar-warning").css({ "width": 100 - (parseInt(good) / (parseInt(good) + parseInt(bad)) * 100) + "%" });
-            $(".breadcrumb li:eq(2)").text(name);
-            break;
-          }
+        shop = response.data;
+        name = shop.name;
+        good = shop.good_cnt;
+        bad = shop.bad_cnt;
+        $("head > title").text(name);
+        $("#name").text(name);
+        $("#good").text(good);
+        $("#bad").text(bad);
+        $(".progress-bar-danger").css({ "width": parseInt(good) / (parseInt(good) + parseInt(bad)) * 100 + "%" });
+        $(".progress-bar-warning").css({ "width": 100 - (parseInt(good) / (parseInt(good) + parseInt(bad)) * 100) + "%" });
+        $(".breadcrumb li:eq(1)").replaceWith("<li><a href='/index.html?category=" + shop.category_id + "'>" + shop.category + "</a></li>");
+        $(".breadcrumb li:eq(2)").text(name);
+        if (shop.img !== "") {
+          $("div.container.contentwrap > div:nth-child(2) > div > div.card > img").attr("src", shop.img);
+        }
       }
     }
   });

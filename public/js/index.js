@@ -1,5 +1,6 @@
 var curType = 0;
-var curCategory = 0;
+var urlParam = getUrlParameter("category");
+var curCategory = urlParam===undefined ? 0 : urlParam;
 //清空筛选条件 & 样式
 function cleanFilter() {
   curType = 0;
@@ -144,6 +145,7 @@ $(document).ready(function () {
             .end();
           $("#allCategory").append(content);
         })
+        showShop(1);  //初始化店铺
       }
     }
   });
@@ -173,4 +175,4 @@ $("#black").click(function () {
   else setCurType(2);
 });
 // 初始化
-showShop(1);
+// showShop(1);
