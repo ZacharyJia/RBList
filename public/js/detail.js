@@ -9,10 +9,10 @@ function showShopDetail(shop_id) {
     data: { "shop_id": shop_id },
     success: function (response) {
       if (response.code === "200") {
-        shop = response.data;
-        name = shop.name;
-        good = shop.good_cnt;
-        bad = shop.bad_cnt;
+        var shop = response.data;
+        var name = shop.name;
+        var good = shop.good_cnt;
+        var bad = shop.bad_cnt;
         $("head > title").text(name);
         $("#name").text(name);
         $("#good").text(good);
@@ -25,6 +25,7 @@ function showShopDetail(shop_id) {
           $("div.container.contentwrap > div:nth-child(2) > div > div.card > img").attr("src", shop.img);
         }
       }
+      else alert(response.msg);
     }
   });
 }
@@ -130,6 +131,10 @@ function comment() {
           $("#commentType > button:nth-child(1)").addClass("btn-danger");
           $("#commentType > button:nth-child(2)").addClass("btn-warning");
         });
+      }
+      else {
+        $("#commentFailInfo").text(response.msg);
+        $("#commentFail").modal();
       }
     }
   });

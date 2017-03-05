@@ -151,10 +151,10 @@ body.loading .loading-modal {
 
 .page-footer {
   margin-top: 80px;
-  padding-top: 20px;
-  background-color: #3280fc;
+  padding-top: 15px;
+  background-color: #5094ff;
   line-height: 40px;
-  color: rgba( 255, 255, 255, 0.9 );
+  color: rgb( 255, 255, 255);
   font-weight: 400;
 }
 .detail-footer{
@@ -162,15 +162,15 @@ body.loading .loading-modal {
   padding-top: 20px;
   background-color: #fff;
   line-height: 40px;
-  color: rgba( 255, 255, 255, 0.9 );
+  color: rgb( 255, 255, 255 );
   font-weight: 400;
 }
 .footer-bgcolor{
-  background-color: #3280fc;
+  background-color: #5094ff;
 }
 .footer-color{
   color: #fff;
 }
 .footer-copyright{
-  background-color: #145CCD;
+  background-color: #5094ff;
 }
