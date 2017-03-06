@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Comment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Validator;
 use Auth;
@@ -89,12 +90,14 @@ class CommentController extends Controller
         }
 
         $data = $builder->get()->map(function ($comment){
+            $update_time = new Carbon($comment->updated_at);
             return [
                 'id' => hashid_encode($comment->id),
                 'creator_id' => hashid_encode($comment->user_id),
                 'creator' => $comment->creator == null ? '匿名用户' : $comment->creator->name,
                 'content' => $comment->content,
                 'type' => $comment->type == 1 ? 'good':'bad',
+                'time' => $update_time->diffForHumans(),
             ];
         });
         $result = [

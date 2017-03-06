@@ -18,6 +18,8 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend("bjtu_email", function ($attribute, $value, $parameters, $validator) {
             return ends_with($value, "@bjtu.edu.cn");
         });
+
+        \Carbon\Carbon::setLocale('zh');
     }
 
     /**

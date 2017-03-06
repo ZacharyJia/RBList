@@ -1,3 +1,18 @@
+// 获取URL
+var getUrlParameter = function getUrlParameter(sParam) {
+  var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+    sURLVariables = sPageURL.split('&'),
+    sParameterName,
+    i;
+
+  for (i = 0; i < sURLVariables.length; i++) {
+    sParameterName = sURLVariables[i].split('=');
+
+    if (sParameterName[0] === sParam) {
+      return sParameterName[1] === undefined ? true : sParameterName[1];
+    }
+  }
+};
 //翻页键
 function pager(callFuncName, totalPage, curPage) {
   $(".pager").replaceWith("<ul class='pager'></ul>");
@@ -33,7 +48,7 @@ function pager(callFuncName, totalPage, curPage) {
 function checkLoginStatus(callback) {
   $.ajax({
     url: "/api/userinfo",
-    success: function (userinfo){
+    success: function (userinfo) {
       if (userinfo.code === "200") {
         if (userinfo.data.verified === 0) {
           verified_text = '您还没有验证邮箱 ' + '<a href=\'/need_verify\' class=\'text-muted\'>去验证</a>';
@@ -53,8 +68,8 @@ function checkLoginStatus(callback) {
 //状态栏登录状态
 function navLoginStatus(username) {
   if (username) {
-    $("#nav_login").hide();
-    $("#nav_register").hide();
+    $("#nav_login").remove();
+    $("#nav_register").remove();
     var newUserStatus = $("<a class='dropdown-toggle' data-toggle='dropdown'></a>")
       .attr("href", "#")
       .text(username);

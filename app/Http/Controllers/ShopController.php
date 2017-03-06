@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ShopController extends Controller
 {
@@ -98,6 +99,35 @@ class ShopController extends Controller
 
     public function orderByValidation($orderBy) {
         return in_array($orderBy, $this->orderBy);
+    }
+
+    public function getDetail(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'shop_id' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->error('506', '参数错误');
+        }
+        $shop_id = hashid_decode($request->input('shop_id'));
+        $shop = Shop::with('category')->find($shop_id);
+        if (empty($shop)) {
+            return $this->error('506', '参数错误');
+        }
+
+
+
+        $result = [
+            'name' => $shop['name'],
+            'desc' => $shop['desc'],
+            'category_id' => hashid_encode($shop['category_id']),
+            'category' => $shop->category->name,
+            'good_cnt' => $shop->goodCommentCount(),
+            'bad_cnt' => $shop->badCommentCount(),
+            'img' => '',
+        ];
+
+        return $this->success($result);
+
     }
 
 }

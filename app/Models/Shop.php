@@ -32,5 +32,10 @@ class Shop extends Model
         return $this->goodCommentCount() - $this->badCommentCount();
     }
 
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category', 'category_id');
+    }
+
 
 }

@@ -149,3 +149,28 @@ body.loading .loading-modal {
   margin-top: 84px;
 }
 
+.page-footer {
+  margin-top: 80px;
+  padding-top: 10px;
+  background-color: #5094ff;
+  line-height: 40px;
+  color: rgb( 255, 255, 255);
+  font-weight: 400;
+}
+.detail-footer{
+  margin-top: 40px;
+  padding-top: 20px;
+  background-color: #fff;
+  line-height: 40px;
+  color: rgb( 255, 255, 255 );
+  font-weight: 400;
+}
+.footer-bgcolor{
+  background-color: #5094ff;
+}
+.footer-color{
+  color: #fff;
+}
+.footer-copyright{
+  background-color: #5094ff;
+}
