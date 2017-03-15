@@ -1,6 +1,6 @@
 var curType = 0;
 var urlParam = getUrlParameter("category");
-var curCategory = urlParam===undefined ? 0 : urlParam;
+var curCategory = urlParam === undefined ? 0 : urlParam;
 //清空筛选条件 & 样式
 function cleanFilter() {
   curType = 0;
@@ -144,6 +144,10 @@ $(document).ready(function () {
             .text(categoryName)
             .end();
           $("#allCategory").append(content);
+          var categorySel = $("<option></option>")
+            .attr("value", categoryId)
+            .text(categoryName);
+          $("#newShopSelection").append(categorySel);
         })
         showShop(1);  //初始化店铺
       }

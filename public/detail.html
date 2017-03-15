@@ -175,6 +175,59 @@
     </div>
   </div>
 
+  <div class="modal fade" id="addShop">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+          <h4 class="modal-title">添加店铺</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <!--<fieldset>-->
+            <!--<legend>店铺信息</legend>-->
+            <div class="form-group">
+              <div class="col-md-4">
+                <label for="newShopName">店铺信息</label>
+                <input type="text" class="form-control" id="newShopName" placeholder="店铺名">
+                <br>
+                <select class="form-control" id="newShopSelection" onchange="this.setAttribute('value',this.value);">
+                  <option value="">请选择一种分类</option>
+                </select>
+              </div>
+
+              <div class="col-md-7">
+                <label for="newShopDescription">店铺描述</label>
+                <textarea class="form-control" rows="4" id="newShopDescription"></textarea>
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="addShop();">提交</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addShopStatus">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <p></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="loading-modal"></div>
 
   <footer class="page-footer">
@@ -185,7 +238,7 @@
           <div class="col-lg-6 col-sm-12">
             <h3>关于交大红黑榜</h3>
             <p>交大红黑榜力图为北交大同学提供一个对周边消费环境的综合评价平台<br>
-            Copyright © 2017 imeow.tch. All Rights Reserved.</p>
+            Copyright © 2017 imeow.tech. All Rights Reserved.</p>
           </div>
           <div class="col-lg-1"></div>
           <div class="col-lg-4 col-sm-12">
@@ -227,7 +280,7 @@
 
 
   <script src="js/jquery-1.11.0.min.js"></script>
-  <script src="js/jquery.cookie.js"></script>
+  <!--<script src="js/jquery.cookie.js"></script>-->
   <script src="js/zui.min.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/detail.js"></script>

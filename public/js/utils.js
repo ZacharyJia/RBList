@@ -73,7 +73,7 @@ function navLoginStatus(username) {
     var newUserStatus = $("<a class='dropdown-toggle' data-toggle='dropdown'></a>")
       .attr("href", "#")
       .text(username);
-    var newUserLogoutUl = $("<li></li>").append("<ul class='dropdown-menu' role='menu'></ul>").children();
+    var newUserDropdownMenu = $("<li></li>").append("<ul class='dropdown-menu' role='menu'></ul>").children();
     var newUserLogoutA = $("<a href='logout'></a>")
       .attr("onclick", "event.preventDefault();$('#logout-form').submit()")
       .text("注销")
@@ -81,12 +81,79 @@ function navLoginStatus(username) {
       .html("<form id=\"logout-form\" action=\"logout\" method=\"POST\" style=\"display: none;\">" +
       "<input type=\"hidden\" name=\"_token\"></form>")
       .append(newUserLogoutA);
-    newUserLogoutUl.append(newUserLogout);
-    var newUserLi = $("<li class='dropdown'></li>").append(newUserStatus).append(newUserLogoutUl);
+
+    createNewShop = $("<li><a href='#addShop' data-toggle='modal'>添加新店铺</a></li>");
+    newUserDropdownMenu.append(createNewShop);
+
+    newUserDropdownMenu.append(newUserLogout);
+    var newUserLi = $("<li class='dropdown'></li>").append(newUserStatus).append(newUserDropdownMenu);
     $("#status").append(newUserLi);
+
   }
 }
+//添加新店铺
+function addShop() {
+  var newShopName = $("#newShopName").val();
+  var newShopDescription = $("#newShopDescription").val();
+  var newShopCategory = $("#newShopSelection").val();
+  if (newShopName === "" || newShopCategory === "") {
+    $("#newShopName").parent().addClass("has-error");
+    return false;
+  }
+  if (newShopDescription === "") {
+    $("#newShopDescription").parent().addClass("has-error");
+    return false;
+  }
 
+  $.ajax({
+    url: "/api/shop/create",
+    data: { " name": newShopName, "desc": newShopDescription, "category": newShopCategory },
+    success: function (response) {
+      if (response.code === "200") {
+        $("#newShopName").val("");
+        $("#newShopDescription").val("");
+        $("#newShopSelection").val("");
+        // $("#newShopSelection > option:nth-child(1)").attr("selected","selected");
+        var status = $("#addShopStatus");
+        status.find(".modal-title").text("创建成功");
+        status.find(".modal-body >p").text("感谢您的贡献!");
+        $('#addShop').modal('hide');
+      }
+      else {
+        var status = $("#addShopStatus");
+        status.find(".modal-title").text("添加失败");
+        status.find(".modal-body >p").text(response.msg);
+      }
+      status.modal();
+      $("#newShopName").parent().addClass("has-error");
+      $("#newShopDescription").parent().addClass("has-error");
+    }
+  });
+}
+
+$("#newShopName").change(function () {
+  var newShopName = this.value;
+  if (newShopName === "") {
+    $("#newShopName").parent().addClass("has-error");
+  }
+  else $("#newShopName").parent().removeClass("has-error");
+});
+
+$("#newShopSelection").change(function () {
+  var newShopCategory = this.value;
+  if (newShopCategory === "") {
+    $("#newShopName").parent().addClass("has-error");
+  }
+  else $("#newShopName").parent().removeClass("has-error");
+});
+
+$("#newShopDescription").change(function () {
+  var newShopDescription = this.value;
+  if (newShopName === "") {
+    $("#newShopDescription").parent().addClass("has-error");
+  }
+  else $("#newShopDescription").parent().removeClass("has-error");
+});
 //设置AJAX默认设置
 $.ajaxSetup({
   // headers: {
