@@ -9,6 +9,8 @@
 namespace App\Http\Controllers;
 
 
+use App\Jobs\NewShopWechatPush;
+use App\Models\Category;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -114,8 +116,6 @@ class ShopController extends Controller
             return $this->error('506', '参数错误');
         }
 
-
-
         $result = [
             'name' => $shop['name'],
             'desc' => $shop['desc'],
@@ -127,6 +127,39 @@ class ShopController extends Controller
         ];
 
         return $this->success($result);
+
+    }
+
+    public function create(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'desc' => 'required',
+            'category' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->error('506', '参数错误');
+        }
+        $category_id = hashid_decode($request->input('category'));
+        $category = Category::find($category_id);
+        if (empty($category)) {
+            return $this->error('506', '参数错误');
+        }
+
+        $cnt = Shop::where('name', '=', $request->input('name'))->count();
+        if ($cnt > 0) {
+            return $this->error('507', '该店铺已经存在啦！！');
+        }
+
+        $shop = new Shop();
+        $shop['name'] = $request->input('name');
+        $shop['desc'] = $request->input('desc');
+        $shop['category_id'] = $category_id;
+        $shop->save();
+
+        $this->dispatch(new NewShopWechatPush($shop));
+
+        return $this->success();
 
     }
 

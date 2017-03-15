@@ -24,3 +24,24 @@ function hashid_decode($str) {
         }
     }
 }
+
+function sc_send(  $text , $desp = '' , $key = 'SCU5887T9367a7799428d4a2294ea4d2da4a6a0858a13e1c60483'  )
+{
+    $postdata = http_build_query(
+        array(
+            'text' => $text,
+            'desp' => $desp
+        )
+    );
+
+    $opts = array('http' =>
+        array(
+            'method'  => 'POST',
+            'header'  => 'Content-type: application/x-www-form-urlencoded',
+            'content' => $postdata
+        )
+    );
+    $context  = stream_context_create($opts);
+    return $result = file_get_contents('http://sc.ftqq.com/'.$key.'.send', false, $context);
+
+}

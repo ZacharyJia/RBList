@@ -41,4 +41,6 @@ Route::post('/api/shopDetail', 'ShopController@getDetail');
 Route::group(['middleware' => ['auth', 'verify']], function (){
 
     Route::post('/api/comment', 'CommentController@comment');
+    Route::post('/api/shop/create', 'ShopController@create');
+
 });
