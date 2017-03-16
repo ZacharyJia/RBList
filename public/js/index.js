@@ -1,11 +1,11 @@
 var curType = 0;
 var urlParam = getUrlParameter("category");
-var curCategory = urlParam===undefined ? 0 : urlParam;
+var curCategory = urlParam === undefined ? 0 : urlParam;
 //清空筛选条件 & 样式
 function cleanFilter() {
   curType = 0;
   curCategory = 0;
-  setNavColor("#333", "#fff");
+  setThemeColor("#333", "#fff");
   $("#red").removeClass("active");
   $("#black").removeClass("active");
   $("#allCategory > li").removeClass("active");
@@ -15,12 +15,12 @@ function setCurType(x) {
   if (x === 1) {
     cleanFilter();
     $("#red").addClass("active");
-    setNavColor("#F1F1F1", "#EA644A");
+    setThemeColor("#F1F1F1", "#EA644A");
   }
   else if (x === 2) {
     cleanFilter();
     $("#black").addClass("active");
-    setNavColor("#F1F1F1", "#BD7B46");
+    setThemeColor("#F1F1F1", "#BD7B46");
   }
   else {
     cleanFilter();
@@ -29,10 +29,16 @@ function setCurType(x) {
   showShop(1);
 }
 
-function setNavColor(fontColor, bgColor) {
+function setThemeColor(fontColor, bgColor) {
+  var footerColor = bgColor;
+  if (bgColor === "#fff") {
+    footerColor = "#5094ff";
+  }
   $(".navbar-default").css("background-color", bgColor);
   $(".navbar-default .navbar-brand").css("color", fontColor);
   $(".navbar-default .navbar-nav > li > a").css("color", fontColor);
+  $(".page-footer").css("background-color", footerColor);
+  $(".footer-bgcolor").css("background-color", footerColor);
   if (bgColor != "#fff")
     $("ul:nth-child(1) > .active > a").css("color", bgColor);
 
@@ -118,6 +124,47 @@ function showShop(curPage) {
     }).show();
   }
 }
+
+//添加新店铺
+function addShop() {
+  var newShopName = $("#newShopName").val();
+  var newShopDescription = $("#newShopDescription").val();
+  var newShopCategory = $("#newShopSelection").val();
+  if (newShopName === "" || newShopCategory === "") {
+    $("#newShopName").parent().addClass("has-error");
+    return false;
+  }
+  if (newShopDescription === "") {
+    $("#newShopDescription").parent().addClass("has-error");
+    return false;
+  }
+
+  $.ajax({
+    url: "/api/shop/create",
+    data: { " name": newShopName, "desc": newShopDescription, "category": newShopCategory },
+    success: function (response) {
+      if (response.code === "200") {
+        $('#addShop').modal('hide');
+        // $("#newShopSelection > option:nth-child(1)").attr("selected","selected");
+        var status = $("#addShopStatus");
+        status.find(".modal-title").text("创建成功");
+        status.find(".modal-body >p").text("感谢您的贡献!");
+        showShop(1);
+        $("#newShopName").val("");
+        $("#newShopDescription").val("");
+        $("#newShopSelection").val("");
+      }
+      else {
+        var status = $("#addShopStatus");
+        status.find(".modal-title").text("添加失败");
+        status.find(".modal-body >p").text(response.msg);
+      }
+      status.modal();
+      $("#newShopName").parent().addClass("has-error");
+      $("#newShopDescription").parent().addClass("has-error");
+    }
+  });
+}
 //滚动监听
 // var first_load = 0;
 // $(window).scroll(function () {
@@ -144,7 +191,11 @@ $(document).ready(function () {
             .text(categoryName)
             .end();
           $("#allCategory").append(content);
-        })
+          var categorySel = $("<option></option>")
+            .attr("value", categoryId)
+            .text(categoryName);
+          $("#newShopSelection").append(categorySel);
+        });
         showShop(1);  //初始化店铺
       }
     }

@@ -72,21 +72,49 @@ function navLoginStatus(username) {
     $("#nav_register").remove();
     var newUserStatus = $("<a class='dropdown-toggle' data-toggle='dropdown'></a>")
       .attr("href", "#")
-      .text(username);
-    var newUserLogoutUl = $("<li></li>").append("<ul class='dropdown-menu' role='menu'></ul>").children();
+      .html(username +" <b class='caret'></b>");
+    var newUserDropdownMenu = $("<li></li>").append("<ul class='dropdown-menu' role='menu'></ul>").children();
     var newUserLogoutA = $("<a href='logout'></a>")
       .attr("onclick", "event.preventDefault();$('#logout-form').submit()")
-      .text("注销")
+      .text("注销");
     var newUserLogout = $("<li></li>")
       .html("<form id=\"logout-form\" action=\"logout\" method=\"POST\" style=\"display: none;\">" +
       "<input type=\"hidden\" name=\"_token\"></form>")
       .append(newUserLogoutA);
-    newUserLogoutUl.append(newUserLogout);
-    var newUserLi = $("<li class='dropdown'></li>").append(newUserStatus).append(newUserLogoutUl);
+
+    createNewShop = $("<li><a href='#addShop' data-toggle='modal'>添加新商户</a></li>");
+    $("#status").append(createNewShop);
+
+    newUserDropdownMenu.append(newUserLogout);
+    var newUserLi = $("<li class='dropdown'></li>").append(newUserStatus).append(newUserDropdownMenu);
     $("#status").append(newUserLi);
+
   }
 }
 
+$("#newShopName").change(function () {
+  var newShopName = this.value;
+  if (newShopName === "") {
+    $("#newShopName").parent().addClass("has-error");
+  }
+  else $("#newShopName").parent().removeClass("has-error");
+});
+
+$("#newShopSelection").change(function () {
+  var newShopCategory = this.value;
+  if (newShopCategory === "") {
+    $("#newShopName").parent().addClass("has-error");
+  }
+  else $("#newShopName").parent().removeClass("has-error");
+});
+
+$("#newShopDescription").change(function () {
+  var newShopDescription = this.value;
+  if (newShopName === "") {
+    $("#newShopDescription").parent().addClass("has-error");
+  }
+  else $("#newShopDescription").parent().removeClass("has-error");
+});
 //设置AJAX默认设置
 $.ajaxSetup({
   // headers: {
