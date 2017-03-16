@@ -14,6 +14,7 @@ use App\Models\Category;
 use App\Models\Shop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
@@ -151,10 +152,14 @@ class ShopController extends Controller
             return $this->error('507', '该店铺已经存在啦！！');
         }
 
+        $user_id = Auth::id();
+
         $shop = new Shop();
         $shop['name'] = $request->input('name');
         $shop['desc'] = $request->input('desc');
         $shop['category_id'] = $category_id;
+        $shop['creator_id'] = $user_id;
+
         $shop->save();
 
         $this->dispatch(new NewShopWechatPush($shop));
