@@ -5,7 +5,7 @@ var curCategory = urlParam === undefined ? 0 : urlParam;
 function cleanFilter() {
   curType = 0;
   curCategory = 0;
-  setNavColor("#333", "#fff");
+  setThemeColor("#333", "#fff");
   $("#red").removeClass("active");
   $("#black").removeClass("active");
   $("#allCategory > li").removeClass("active");
@@ -15,12 +15,12 @@ function setCurType(x) {
   if (x === 1) {
     cleanFilter();
     $("#red").addClass("active");
-    setNavColor("#F1F1F1", "#EA644A");
+    setThemeColor("#F1F1F1", "#EA644A");
   }
   else if (x === 2) {
     cleanFilter();
     $("#black").addClass("active");
-    setNavColor("#F1F1F1", "#BD7B46");
+    setThemeColor("#F1F1F1", "#BD7B46");
   }
   else {
     cleanFilter();
@@ -29,10 +29,16 @@ function setCurType(x) {
   showShop(1);
 }
 
-function setNavColor(fontColor, bgColor) {
+function setThemeColor(fontColor, bgColor) {
+  var footerColor = bgColor;
+  if (bgColor === "#fff") {
+    footerColor = "#5094ff";
+  }
   $(".navbar-default").css("background-color", bgColor);
   $(".navbar-default .navbar-brand").css("color", fontColor);
   $(".navbar-default .navbar-nav > li > a").css("color", fontColor);
+  $(".page-footer").css("background-color", footerColor);
+  $(".footer-bgcolor").css("background-color", footerColor);
   if (bgColor != "#fff")
     $("ul:nth-child(1) > .active > a").css("color", bgColor);
 
