@@ -9,7 +9,7 @@
                 <div class="panel-body">
                     @if($status == 0)
                         邮箱验证完成，欢迎访问交大红黑榜。
-                        <a class="btn btn-primary" href="{{ route('home') }}">开始访问</a>
+                        <a class="btn btn-primary" href="{{ route('index') }}">开始访问</a>
                     @elseif($status == 1)
                         您已激活账户，无需验证邮箱。
                     @else

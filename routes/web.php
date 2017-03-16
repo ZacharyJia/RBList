@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return redirect('/index.html');
-});
+})->name('index');
 
 Auth::routes();
 

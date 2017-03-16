@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => 'notice@zacharyjia.me',
+        'address' => env('MAIL_FROM'),
         'name' => '交大红黑榜',
     ],
 
