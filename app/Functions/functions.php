@@ -25,8 +25,11 @@ function hashid_decode($str) {
     }
 }
 
-function sc_send(  $text , $desp = '' , $key = 'SCU5887T9367a7799428d4a2294ea4d2da4a6a0858a13e1c60483'  )
+function sc_send(  $text , $desp = '' , $key = '')
 {
+    if ($key == '') {
+        $key = env('SC_KEY');
+    }
     $postdata = http_build_query(
         array(
             'text' => $text,
