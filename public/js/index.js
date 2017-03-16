@@ -118,6 +118,47 @@ function showShop(curPage) {
     }).show();
   }
 }
+
+//添加新店铺
+function addShop() {
+  var newShopName = $("#newShopName").val();
+  var newShopDescription = $("#newShopDescription").val();
+  var newShopCategory = $("#newShopSelection").val();
+  if (newShopName === "" || newShopCategory === "") {
+    $("#newShopName").parent().addClass("has-error");
+    return false;
+  }
+  if (newShopDescription === "") {
+    $("#newShopDescription").parent().addClass("has-error");
+    return false;
+  }
+
+  $.ajax({
+    url: "/api/shop/create",
+    data: { " name": newShopName, "desc": newShopDescription, "category": newShopCategory },
+    success: function (response) {
+      if (response.code === "200") {
+        $('#addShop').modal('hide');
+        // $("#newShopSelection > option:nth-child(1)").attr("selected","selected");
+        var status = $("#addShopStatus");
+        status.find(".modal-title").text("创建成功");
+        status.find(".modal-body >p").text("感谢您的贡献!");
+        showShop(1);
+        $("#newShopName").val("");
+        $("#newShopDescription").val("");
+        $("#newShopSelection").val("");
+      }
+      else {
+        var status = $("#addShopStatus");
+        status.find(".modal-title").text("添加失败");
+        status.find(".modal-body >p").text(response.msg);
+      }
+      status.modal();
+      $("#newShopName").parent().addClass("has-error");
+      $("#newShopDescription").parent().addClass("has-error");
+    }
+  });
+}
 //滚动监听
 // var first_load = 0;
 // $(window).scroll(function () {
@@ -148,7 +189,7 @@ $(document).ready(function () {
             .attr("value", categoryId)
             .text(categoryName);
           $("#newShopSelection").append(categorySel);
-        })
+        });
         showShop(1);  //初始化店铺
       }
     }
